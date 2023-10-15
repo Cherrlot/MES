@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginActivity">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.zhizhunbao.module.login.listener.LoginClickListener" />
+
+        <variable
+            name="viewModel"
+            type="com.zhizhunbao.module.login.LoginViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/login_back"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/DIMEN_14DP"
+            android:background="@drawable/shape_white_r10_bg"
+            android:elevation="@dimen/DIMEN_8DP"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/DIMEN_24DP"
+                android:layout_marginTop="@dimen/DIMEN_24DP"
+                android:text="@string/login"
+                android:textColor="@color/color_457AFF"
+                android:textSize="@dimen/DIMEN_16SP"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DIMEN_30DP"
+                android:layout_marginHorizontal="@dimen/DIMEN_24DP"
+                android:hint="@string/app_please_enter_user_name"
+                android:textColorHint="@color/color_D3D3D3"
+                android:background="@null"
+                android:singleLine="true"
+                android:text="@={viewModel.mUserName}"
+                android:textColor="@color/app_textNormal"
+                android:textSize="@dimen/DIMEN_16SP"
+                app:layout_constraintTop_toBottomOf="@id/tv_register"/>
+
+            <View
+                android:id="@+id/dv1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/DIMEN_1DP"
+                android:layout_marginTop="@dimen/DIMEN_10DP"
+                android:background="@color/color_F2F3F6"
+                app:layout_constraintStart_toStartOf="@id/et_account"
+                app:layout_constraintEnd_toEndOf="@id/et_account"
+                app:layout_constraintTop_toBottomOf="@id/et_account"/>
+
+            <View
+                android:id="@+id/dv2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/DIMEN_1DP"
+                android:layout_marginTop="@dimen/DIMEN_10DP"
+                android:background="@color/color_F2F3F6"
+                app:layout_constraintStart_toStartOf="@id/et_account"
+                app:layout_constraintEnd_toEndOf="@id/et_account"
+                app:layout_constraintTop_toBottomOf="@id/et_pw"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_pw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:textColorHint="@color/color_D3D3D3"
+                android:layout_marginTop="@dimen/DIMEN_19DP"
+                android:layout_marginHorizontal="@dimen/DIMEN_24DP"
+                android:hint="@string/app_please_enter_password"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:text="@={viewModel.mPassword}"
+                android:textColor="@color/app_textNormal"
+                android:textSize="@dimen/DIMEN_16SP"
+                app:layout_constraintTop_toBottomOf="@id/dv1"/>
+
+            <Button
+                android:id="@+id/btn_login_register"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_42DP"
+                android:layout_marginVertical="@dimen/DIMEN_32DP"
+                android:layout_marginHorizontal="@dimen/DIMEN_24DP"
+                android:background="@drawable/shape_confirm_bg"
+                android:clickFilter="@{() -> listener.onLoginClick()}"
+                android:foreground="@drawable/ripple_foreground_radius_80"
+                android:padding="0dp"
+                android:text="@string/app_login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/DIMEN_17SP"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dv2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

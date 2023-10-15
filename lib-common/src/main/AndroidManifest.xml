@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 关闭后台进程 -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application>
+        <!-- WebView 界面 -->
+        <activity
+            android:name="com.zhizhunbao.lib.common.ui.activity.WebViewActivity"
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".qrcode.ToolbarCaptureActivity"
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/AppCompatCaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <provider
+            android:name="com.zhizhunbao.lib.common.provider.InitContentProvider"
+            android:authorities="${applicationId}.InitContentProvider"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="com.zhizhunbao.lib.common.initializer.MMKVInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.zhizhunbao.lib.common.initializer.ARouterInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.zhizhunbao.lib.common.initializer.LiveEventBusInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.zhizhunbao.lib.common.initializer.LogInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.zhizhunbao.lib.common.initializer.KoinInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.zhizhunbao.lib.common.initializer.UpdateAppUtilsInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.zhizhunbao.lib.common.initializer.JPushInitializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
+</manifest>

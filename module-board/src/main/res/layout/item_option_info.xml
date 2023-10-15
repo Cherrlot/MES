@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.zhizhunbao.lib.common.bean.OptionInfoBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/DIMEN_10DP"
+        android:layout_marginVertical="@dimen/DIMEN_15DP"
+        android:background="@drawable/shape_white_r8_bg"
+        android:elevation="@dimen/DIMEN_10DP"
+        android:minHeight="@dimen/DIMEN_50DP"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/text_00_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/DIMEN_20DP"
+            android:text="@{bean.group}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="基础" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mItemRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DIMEN_10DP"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:listitem="@layout/item_option_info_child" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DIMEN_1DP"
+            android:layout_marginTop="@dimen/DIMEN_8DP"
+            android:background="@color/color_969799"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.zhizhunbao.lib.common.bean.OptionListBean" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/DIMEN_15DP"
+        android:layout_marginTop="@dimen/DIMEN_20DP"
+        android:background="@drawable/shape_white_r8_bg"
+        android:elevation="@dimen/DIMEN_10DP"
+        android:foreground="@drawable/ripple_foreground_radius_8"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_setting"
+            android:layout_width="@dimen/DIMEN_35DP"
+            android:layout_height="@dimen/DIMEN_35DP"
+            android:layout_marginVertical="@dimen/DIMEN_12DP"
+            android:layout_marginStart="@dimen/DIMEN_10DP"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_setting"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/DIMEN_13DP"
+            android:layout_height="@dimen/DIMEN_13DP"
+            android:layout_marginEnd="@dimen/DIMEN_8DP"
+            android:src="@drawable/ic_chevron"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_setting"
+            style="@style/text_33_16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/DIMEN_10DP"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{bean.Descr}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_setting"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

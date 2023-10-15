@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhizhunbao.module.mine.viewmodel.DeviceListViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_colorPrimary"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:bind_toolbar_navigationClick="@{viewModel.onBackClick}"
+            app:navigationIcon="@drawable/ic_back_white"
+            app:theme="@style/app_toolbar"
+            app:title="@string/menu_device"
+            app:titleCentered="true" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_F4F8FB">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="@dimen/DIMEN_10DP"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    <FrameLayout
+                        android:id="@+id/fl_refresh"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                            android:id="@+id/refreshLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:srlDisableContentWhenLoading="true"
+                            app:srlDisableContentWhenRefresh="true"
+                            app:srlEnableAutoLoadMore="false"
+                            app:srlEnableLoadMore="false"
+                            app:srlEnableLoadMoreWhenContentNotFull="false"
+                            app:srlEnableRefresh="true">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/mRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                tools:listitem="@layout/item_device_no" />
+                        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+                    </FrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</layout>

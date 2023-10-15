@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_hollow_e2_bg"
+    android:elevation="@dimen/DIMEN_4DP"
+    app:cardCornerRadius="@dimen/DIMEN_5DP"
+    app:cardElevation="@dimen/DIMEN_4DP"
+    app:cardMaxElevation="@dimen/DIMEN_10DP"
+    app:contentPadding="@dimen/DIMEN_10DP">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <DatePicker
+            android:id="@+id/dp_start_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="true"
+            android:datePickerMode="spinner"
+            android:minDate="01/01/2020"
+            android:spinnersShown="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <DatePicker
+            android:id="@+id/dp_end_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="true"
+            android:datePickerMode="spinner"
+            android:minDate="01/01/2020"
+            android:spinnersShown="false"
+            app:layout_constraintStart_toEndOf="@id/dp_start_calendar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/DIMEN_20DP"
+            android:padding="@dimen/DIMEN_4DP"
+            android:text="@string/cancel"
+            android:textColor="@color/color_primary_green"
+            android:textSize="@dimen/DIMEN_12SP"
+            app:layout_constraintBottom_toBottomOf="@id/btn_sure"
+            app:layout_constraintEnd_toStartOf="@id/btn_sure"
+            app:layout_constraintTop_toTopOf="@id/btn_sure" />
+
+        <Button
+            android:id="@+id/btn_sure"
+            android:layout_width="@dimen/DIMEN_65DP"
+            android:layout_height="@dimen/DIMEN_25DP"
+            android:layout_marginBottom="@dimen/DIMEN_10DP"
+            android:background="@drawable/b_normal_btn_selector"
+            android:text="@string/sure"
+            android:textColor="@color/white"
+            android:textSize="@dimen/DIMEN_12SP"
+            app:layout_constraintBottom_toBottomOf="@id/dp_end_calendar"
+            app:layout_constraintEnd_toEndOf="@id/dp_end_calendar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

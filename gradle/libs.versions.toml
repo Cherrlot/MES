@@ -1,0 +1,196 @@
+[versions]
+minSdk = "24"
+compileSdk = "33"
+targetSdk ="30"
+versionCode = "2023081601"
+versionName = "1.0.1"
+# 0为本地环境  1为测试环境  2为线上环境 3为打印日志的线上环境
+netControl = "3"
+localApi = "\"http://10.20.11.114\""
+testApi = "\"http://10.20.11.114\""
+releaseApi = "\"http://zhizhunbao.51dingdian.com\""
+# 极光推送appkey
+jpush-appkey = "9d4e3be5ff331117402406df"
+
+androidGradlePlugin = "8.1.0-alpha10"
+org-jetbrains-kotlin-android = "1.8.0"
+com-android-library = "7.4.1"
+core-ktx = "1.9.0"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.3"
+espresso-core = "3.4.0"
+appcompat = "1.4.1"
+material = "1.5.0"
+androidxCore = "1.9.0"
+androidxCoreSplashscreen = "1.0.0"
+androidxLifecycle = "2.6.1"
+androidxMetrics = "1.0.0-alpha03"
+androidxMacroBenchmark = "1.2.0-alpha16"
+androidxProfileinstaller = "1.3.1"
+androidxWindowManager = "1.0.0"
+androidxWork = "2.9.0-alpha01"
+kotlin = "1.9.0"
+kotlinxCoroutines = "1.6.4"
+kotlinxSerializationJson = "1.5.1"
+retrofitKotlinxSerializationJson = "1.0.0"
+constraintlayout = "2.1.3"
+recyclerview = "1.2.1"
+viewpager2 = "1.0.0"
+multidex = "2.0.1"
+logger = "2.2.0"
+retrofit = "2.9.0"
+okhttp = "4.9.0"
+koin = "3.1.2"
+glide = "4.12.0"
+liveEventBus = "1.7.2"
+immersionbar = "3.0.0"
+mmkv = "1.2.5"
+arouter = "1.5.2"
+materialDialog = "3.3.0"
+autosize = "v1.2.1"
+banner = "2.1.0"
+zxing = "4.3.0"
+pickerView = "4.1.9"
+pictureselector = "v3.0.9"
+startup = "1.1.1"
+updateapputilsx = "2.3.0"
+easypermissions = "3.0.0"
+refresh-layout = "2.0.3"
+magicIndicator = "1.7.0"
+roundedimageview = "2.3.0"
+mikephilchart = "v3.1.0"
+calendarview = "2.0.0"
+threetenabp = "1.1.1"
+camerax = "1.2.0-alpha02"
+regionSelector = "2.0"
+activity-ktx = "1.1.0"
+fragment-ktx = "1.2.5"
+
+
+[libraries]
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
+multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+#闪屏页 http://www.mobange.com/nav/m/102034.html
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
+#性能监测 https://blog.csdn.net/androiddevs/article/details/123335020
+androidx-metrics = { group = "androidx.metrics", name = "metrics-performance", version.ref = "androidxMetrics" }
+#编译、启动优化 https://zhuanlan.zhihu.com/p/596716179
+androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "androidxMacroBenchmark" }
+androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "androidxProfileinstaller" }
+#借助 Jetpack WindowManager 库，应用开发者可为新的设备外形规格和多窗口环境提供支持
+androidx-window-manager = { module = "androidx.window:window", version.ref = "androidxWindowManager" }
+# Jetpack WorkManager库 https://blog.csdn.net/zhangphil/article/details/89399972
+androidx-work-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "androidxWork" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version.ref = "kotlinxCoroutines" }
+#Kotlin 官方的序列化库 https://blog.csdn.net/vitaviva/article/details/104779479/
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
+#Logger 日志打印  - Github: [https://github.com/orhanobut/logger]
+logger = { group = "com.orhanobut", name = "logger", version.ref = "logger" }
+#Retrofit - Github：[https://github.com/square/retrofit]
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+retrofit-converter-scalars = { group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "retrofit" }
+# okhttp - Github：[https://github.com/square/okhttp]
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+#Koin  - Github：[https://github.com/InsertKoinIO/koin]
+koin = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-android-compat = { group = "io.insert-koin", name = "koin-android-compat", version.ref = "koin" }
+koin-androidx-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+#Glide  - Github：[https://github.com/bumptech/glide]
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+#LiveEventBus  - Github：[https://github.com/JeremyLiao/LiveEventBus]
+liveEventBus = { group = "com.jeremyliao", name = "live-event-bus-x", version.ref = "liveEventBus" }
+#状态栏工具  - Github: [https://github.com/gyf-dev/ImmersionBar]
+immersionbar = { group = "com.gyf.immersionbar", name = "immersionbar", version.ref = "immersionbar" }
+immersionbar-ktx = { group = "com.gyf.immersionbar", name = "immersionbar-ktx", version.ref = "immersionbar" }
+#MMKV   Github: [https://github.com/tencent/mmkv]
+mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
+#ARouter 路由 - Github: [https://github.com/alibaba/ARouter]
+arouter = { group = "com.alibaba", name = "arouter-api", version.ref = "arouter" }
+arouter-compiler = { group = "com.alibaba", name = "arouter-compiler", version.ref = "arouter" }
+#material_dialog https://github.com/afollestad/material-dialogs
+materialDialog = { group = "com.afollestad.material-dialogs", name = "core", version.ref = "materialDialog" }
+materialDialog-lifecycle = { group = "com.afollestad.material-dialogs", name = "lifecycle", version.ref = "materialDialog" }
+materialDialog-bottomsheets = { group = "com.afollestad.material-dialogs", name = "bottomsheets", version.ref = "materialDialog" }
+materialDialog-input = { group = "com.afollestad.material-dialogs", name = "input", version.ref = "materialDialog" }
+#屏幕适配
+autosize = { group = "com.github.JessYanCoding", name = "AndroidAutoSize", version.ref = "autosize" }
+#Banner
+banner = { group = "com.youth.banner", name = "banner", version.ref = "banner" }
+#zxing  - Github：[https://github.com/journeyapps/zxing-android-embedded]
+zxing = { group = "com.journeyapps", name = "zxing-android-embedded", version.ref = "zxing" }
+#仿苹果 滚轮 城市选择器 Android-PickerView https://github.com/Bigkoo/Android-PickerView
+pickerView = { group = "com.contrarywind", name = "Android-PickerView", version.ref = "pickerView" }
+# 相册 https://github.com/LuckSiege/PictureSelector/blob/master/README_CN.md
+pictureselector = { group = "io.github.lucksiege", name = "pictureselector", version.ref = "pictureselector" }
+pictureselector-compress = { group = "io.github.lucksiege", name = "compress", version.ref = "pictureselector" }
+#startup https://blog.csdn.net/qq_40909351/article/details/106726204
+startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup" }
+#版本升级框架 https://github.com/teprinciple/UpdateAppUtils
+updateapputils = { group = "com.teprinciple", name = "updateapputilsx", version.ref = "updateapputilsx" }
+#版本升级框架 https://github.com/teprinciple/UpdateAppUtils
+easypermissions = { group = "pub.devrel", name = "easypermissions", version.ref = "easypermissions" }
+#刷新框架 https://github.com/scwang90/SmartRefreshLayout
+refresh-layout = { group = "com.scwang.smart", name = "refresh-layout-kernel", version.ref = "refresh-layout" }
+refresh-header-material = { group = "com.scwang.smart", name = "refresh-header-material", version.ref = "refresh-layout" }
+refresh-footer-classics = { group = "com.scwang.smart", name = "refresh-footer-classics", version.ref = "refresh-layout" }
+#指示器  MagicIndicator  https://github.com/hackware1993/MagicIndicator
+magicIndicator = { group = "com.github.hackware1993", name = "MagicIndicator", version.ref = "magicIndicator" }
+#RoundedImageView  https://github.com/vinc3m1/RoundedImageView
+roundedimageview = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundedimageview" }
+#各种统计图，饼图折线图等 MPAndroidChart  https://github.com/PhilJay/MPAndroidChart
+mikephilchart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "mikephilchart" }
+# 日期选择  https://github.com/prolificinteractive/material-calendarview
+calendarview = { group = "com.github.prolificinteractive", name = "material-calendarview", version.ref = "calendarview" }
+threetenabp = { group = "com.jakewharton.threetenabp", name = "threetenabp", version.ref = "threetenabp" }
+# CameraX
+camerax = { group = "androidx.camera", name = "camera-core", version.ref = "camerax" }
+camera-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
+camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
+camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+#  四级联动（省、市、区、镇）的地区选择器  https://blog.csdn.net/weixin_42630638/article/details/123924321
+regionSelector = { group = "com.github.gamekonglee", name = "regionSelector", version.ref = "regionSelector" }
+activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx" }
+fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version = "2.5.2" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version = "2.5.2" }
+
+[plugins]
+com-android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "org-jetbrains-kotlin-android" }
+org-jetbrains-kotlin-plugin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "org-jetbrains-kotlin-android" }
+
+[bundles]
+lifecycleBundle = [ "androidx-lifecycle-livedata-ktx", "androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx" ]
+androidCommon = [ "appcompat", "material", "constraintlayout", "androidx-core-ktx" ]
+retrofitBundle = [ "retrofit", "retrofit-converter-gson", "retrofit-converter-scalars" ]
+refreshBundle = [ "refresh-layout", "refresh-header-material", "refresh-footer-classics" ]
+calendarviewBundle = [ "calendarview", "threetenabp" ]
+glideBundle = [ "glide", "glide-compiler" ]
+okhttpBundle = [ "okhttp", "okhttp-logging-interceptor" ]
+immersionbarBundle = [ "immersionbar", "immersionbar-ktx" ]
+pictureselectorBundle = [ "pictureselector", "pictureselector-compress" ]
+cameraxBundle = [ "camerax", "camera-camera2", "camera-lifecycle", "camera-view" ]
+koinBundle = [ "koin", "koin-android-compat", "koin-androidx-workmanager", "koin-androidx-compose" ]
+materialDialogBundle = [ "materialDialog", "materialDialog-lifecycle", "materialDialog-input", "materialDialog-bottomsheets" ]
+

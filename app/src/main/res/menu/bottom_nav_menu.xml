@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_board"
+        android:icon="@drawable/ic_menu_dish_manager"
+        android:title="@string/board" />
+
+    <item
+        android:id="@+id/navigation_scan"
+        android:icon="@drawable/ic_menu_setting"
+        android:title="@string/option" />
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_dashboard"-->
+<!--        android:icon="@drawable/ic_nav_company"-->
+<!--        android:title="@string/title_dashboard" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_patrol"-->
+<!--        android:icon="@drawable/ic_patrol"-->
+<!--        android:title="@string/title_patrol" />-->
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/ic_menu_vip_manager"
+        android:title="@string/mine" />
+
+</menu>

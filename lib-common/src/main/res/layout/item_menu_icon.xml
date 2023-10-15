@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_menu_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:textColor="#000000"
+    android:clickable="true"
+    android:paddingHorizontal="@dimen/DIMEN_10DP"
+    app:drawableRightCompat="@drawable/ic_spinner"
+    android:focusable="true"
+    android:drawablePadding="@dimen/DIMEN_5DP"/>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.zhizhunbao.lib.common.bean.OptionBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/DIMEN_15DP"
+        android:layout_marginVertical="@dimen/DIMEN_10DP"
+        android:background="@drawable/shape_white_r8_bg"
+        android:elevation="@dimen/DIMEN_10DP">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_33_16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/DIMEN_15DP"
+            android:layout_marginTop="@dimen/DIMEN_10DP"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{bean.Machine}"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="XXXX监管单位" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_status"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/DIMEN_15DP"
+            android:src="@drawable/circle_red"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DIMEN_8DP"
+            android:layout_marginTop="@dimen/DIMEN_10DP"
+            android:background="@color/color_E5E5E5"
+            android:layout_marginHorizontal="15dp"
+            android:progressDrawable="@drawable/board_progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_sub_title"
+            style="@style/text_33_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DIMEN_15DP"
+            android:text="@{bean.Product}"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/pb"
+            tools:text="张三" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/text_99_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/DIMEN_14DP"
+            android:text="@{bean.Orderno}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sub_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_sub_title"
+            tools:text="15208344051" />
+
+        <View
+            android:id="@+id/d1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DIMEN_1DP"
+            android:layout_marginTop="@dimen/DIMEN_6DP"
+            android:background="@color/color_E5E5E5"
+            app:layout_constraintTop_toBottomOf="@id/tv_sub_title" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            style="@style/text_99_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/DIMEN_15DP"
+            android:layout_marginStart="@dimen/DIMEN_2DP"
+            android:text="@{bean.Descr}"
+            android:gravity="start|top"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/d1"
+            app:layout_constraintEnd_toEndOf="@id/gl1"
+            tools:text="上海市浦江新区惠南镇城上海市浦江新区惠南镇城上海市浦江新区惠南镇城上海市浦江新区惠南镇城" />
+
+        <TextView
+            android:id="@+id/tv_remark"
+            style="@style/text_99_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/DIMEN_15DP"
+            android:layout_marginStart="@dimen/DIMEN_2DP"
+            android:text="@{bean.Remark}"
+            android:gravity="start|top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_location"
+            app:layout_constraintEnd_toEndOf="@id/tv_finish"
+            tools:text="上海市浦江新区惠南镇城上海市浦江新区惠南镇城上海市浦江新区惠南镇城上海市浦江新区惠南镇城" />
+
+        <TextView
+            style="@style/text_99_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/DIMEN_15DP"
+            android:text="@{bean.getFinishString}"
+            app:layout_constraintTop_toBottomOf="@id/d1"
+            app:layout_constraintEnd_toStartOf="@id/tv_finish"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/tv_finish"
+            style="@style/text_green_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/DIMEN_15DP"
+            android:layout_marginEnd="@dimen/DIMEN_15DP"
+            android:text="@{bean.getPlanString}"
+            app:layout_constraintTop_toBottomOf="@id/d1"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="100" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintStart_toStartOf="@id/tv_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

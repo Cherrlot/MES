@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhizhunbao.module.mine.viewmodel.MineViewModel" />
+
+        <variable
+            name="listener"
+            type="com.zhizhunbao.module.mine.listener.MineClickListener" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:background="@color/app_colorPrimary"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DIMEN_5DP"
+                android:layout_marginBottom="@dimen/DIMEN_30DP"
+                android:maxLines="1"
+                android:text="@{viewModel.mAccountName}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/DIMEN_16SP"
+                app:layout_constraintStart_toStartOf="@id/tv_company_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="jjadmin" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/DIMEN_15DP"
+                android:layout_marginTop="@dimen/DIMEN_50DP"
+                android:maxLines="1"
+                android:text="@{viewModel.mCompanyName}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/DIMEN_18SP"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="XXXX监管局" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DIMEN_5DP"
+                android:maxLines="1"
+                android:text="@{viewModel.mUserName}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/DIMEN_16SP"
+                app:layout_constraintStart_toStartOf="@id/tv_company_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_company_name"
+                tools:text="张三" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_top"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mClDeviceSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/DIMEN_15DP"
+                android:layout_marginTop="@dimen/DIMEN_20DP"
+                android:background="@drawable/shape_white_r8_bg"
+                android:clickFilter="@{() -> listener.deviceClick()}"
+                android:elevation="@dimen/DIMEN_10DP"
+                android:foreground="@drawable/ripple_foreground_radius_8"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_device"
+                    android:layout_width="@dimen/DIMEN_35DP"
+                    android:layout_height="@dimen/DIMEN_35DP"
+                    android:layout_marginVertical="@dimen/DIMEN_12DP"
+                    android:layout_marginStart="@dimen/DIMEN_10DP"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_setting"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_width="@dimen/DIMEN_13DP"
+                    android:layout_height="@dimen/DIMEN_13DP"
+                    android:layout_marginEnd="@dimen/DIMEN_8DP"
+                    android:src="@drawable/ic_chevron"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvDeviceSelected"
+                    style="@style/text_66_16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/DIMEN_10DP"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:gravity="end"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_device"
+                    app:layout_constraintEnd_toStartOf="@id/image"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_device"
+                    style="@style/text_33_16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/DIMEN_10DP"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/menu_device"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_device"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/DIMEN_15DP"
+                android:layout_marginTop="@dimen/DIMEN_20DP"
+                android:background="@drawable/shape_white_r8_bg"
+                android:clickFilter="@{() -> listener.settingClick()}"
+                android:elevation="@dimen/DIMEN_10DP"
+                android:foreground="@drawable/ripple_foreground_radius_8"
+                app:layout_constraintTop_toBottomOf="@id/mClDeviceSelect">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_setting"
+                    android:layout_width="@dimen/DIMEN_35DP"
+                    android:layout_height="@dimen/DIMEN_35DP"
+                    android:layout_marginVertical="@dimen/DIMEN_12DP"
+                    android:layout_marginStart="@dimen/DIMEN_10DP"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_setting"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/DIMEN_13DP"
+                    android:layout_height="@dimen/DIMEN_13DP"
+                    android:layout_marginEnd="@dimen/DIMEN_8DP"
+                    android:src="@drawable/ic_chevron"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_setting"
+                    style="@style/text_33_16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/DIMEN_10DP"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/menu_setting"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_setting"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

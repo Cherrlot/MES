@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MySplashTheme" parent="Theme.SplashScreen">
+        <item name="android:windowSplashscreenContent">@drawable/splash_welcome</item>
+        <!--        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_welcome</item>-->
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+        <!--        <item name="windowSplashScreenIconBackgroundColor">#BB86FC</item>-->
+    </style>
+</resources>

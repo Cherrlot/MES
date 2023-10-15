@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用主色调 -->
+    <color name="app_colorPrimary">#457AFF</color>
+    <!-- 应用主要暗色调 -->
+    <color name="app_colorPrimaryDark">#03A9F4</color>
+    <!-- 应用主要亮色调 -->
+    <color name="app_colorPrimaryLight">#B3E5FC</color>
+    <!-- 控件选中默认颜色 -->
+    <color name="app_colorAccent">#FF4081</color>
+    <!-- 分隔颜色 -->
+    <color name="app_colorDivider">#C8C9CC</color>
+    <!-- 应用错误色 -->
+    <color name="app_colorError">#D50000</color>
+    <!-- 应用主要背景色 -->
+    <color name="app_backgroundPrimary">@color/app_white</color>
+    <!-- 应用次要背景色 -->
+    <color name="app_backgroundSecondary">#EBEBEB</color>
+    <!-- 弹窗背景色 -->
+    <color name="app_backgroundDialog">@color/app_translucentDark</color>
+    <!-- App 背景色 -->
+    <color name="app_backgroundWindow">#FAF9F9</color>
+
+    <!-- 标题文本颜色 -->
+    <color name="app_textPrimary">@color/app_white</color>
+    <!-- 标题文本颜色 -->
+    <color name="app_gray">#F7F8FA</color>
+    <!-- 标题文本颜色 -->
+    <color name="app_orange">#ED6A0C</color>
+    <!-- 标题文本颜色 -->
+    <color name="app_green">#18C65C</color>
+    <!-- 文本主色调 -->
+    <color name="app_textNormal">#212121</color>
+    <!-- 文本次要色调 -->
+    <color name="app_textSecondary">#999999</color>
+    <!-- 提示文本色调 -->
+    <color name="app_textHint">#CCCCCC</color>
+    <!-- 文本主色调 -->
+    <color name="app_textTheme">@color/app_colorPrimary</color>
+    <!-- 文本重点颜色 -->
+    <color name="app_textAccent">@color/app_colorAccent</color>
+    <!-- 文本错误颜色 -->
+    <color name="app_textError">@color/app_colorError</color>
+    <!-- 文本积分颜色 -->
+    <color name="app_textCoin">#FFF176</color>
+
+    <!-- 主要着色 -->
+    <color name="app_tintPrimary">@color/app_white</color>
+    <!-- 重点着色 -->
+    <color name="app_tintAccent">@color/app_colorAccent</color>
+    <!-- 非重点着色 -->
+    <color name="app_tintSecondary">#F1F1F1</color>
+    <!-- 主题着色 -->
+    <color name="app_tintTheme">@color/app_colorPrimary</color>
+    <!-- 错误着色 -->
+    <color name="app_tintError">@color/app_colorError</color>
+
+    <!-- 灰色 -->
+    <color name="gray">#FF808080</color>
+    <!-- 红色 -->
+    <color name="red">#FFFF0000</color>
+    <!-- 金色 -->
+    <color name="gold">#FFFFD700</color>
+    <!-- 黄色 -->
+    <color name="yellow">#FFFFFF00</color>
+    <!-- 绿色 -->
+    <color name="green">#FF008000</color>
+    <!-- 蓝色 -->
+    <color name="blue">#FF0000FF</color>
+    <!-- 紫色 -->
+    <color name="purple">#FF800080</color>
+    <!-- 粉色 -->
+    <color name="pink">#FFFFC0CB</color>
+    <!-- 橙色 -->
+    <color name="orange">#FFFFA500</color>
+
+    <color name="app_white">#FFFFFF</color>
+    <color name="app_black">#000000</color>
+    <color name="app_transparentLight">#00FFFFFF</color>
+    <color name="app_translucentDark">#60000000</color>
+    <color name="app_translucentLight">#60FFFFFF</color>
+    <color name="color88000000">#88000000</color>
+    <color name="color9a9b98">#9a9b98</color>
+    <color name="color666666">#666666</color>
+    <color name="color333333">#333333</color>
+    <color name="color7f333333">#7f333333</color>
+    <color name="color999999">#999999</color>
+    <color name="colorF8F8F8">#F8F8F8</color>
+    <color name="transparent">#00000000</color>
+    <color name="GRAY">#ff808080</color>
+    <color name="color_primary_green">#3DCB5A</color>
+    <color name="color_line">#ECECEC</color>
+    <color name="color_c8e6c9">#c8e6c9</color>
+    <color name="color_EEEEEE">#EEEEEE</color>
+    <color name="color_323233">#323233</color>
+    <color name="color_EBF5ED">#EBF5ED</color>
+    <color name="color_FF2E00">#FF2E00</color>
+    <color name="color_C8C9CC">#C8C9CC</color>
+    <color name="color_979797">#979797</color>
+    <color name="color_222222">#222222</color>
+    <color name="color_F4F8FB">#F4F8FB</color>
+    <color name="color_969799">#969799</color>
+    <color name="color_DCDEE0">#DCDEE0</color>
+    <color name="color_divider">#EBEDF0</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_E12626">#E12626</color>
+    <color name="color_111111">#111111</color>
+    <color name="color_363442">#363442</color>
+    <color name="color_F2F3F5">#F2F3F5</color>
+    <color name="color_1890FF">#1890FF</color>
+    <color name="color_C0C0C0">#C0C0C0</color>
+    <color name="color_E5E5E5">#E5E5E5</color>
+    <color name="color_F66B44">#F66B44</color>
+    <color name="color_202020">#202020</color>
+    <color name="color_FAFAFA">#FAFAFA</color>
+    <color name="color_ED7016">#ED7016</color>
+    <color name="color_457AFF">#457AFF</color>
+    <color name="color_D3D3D3">#D3D3D3</color>
+    <color name="color_F2F3F6">#F2F3F6</color>
+    <color name="color_F4F3F8">#F4F3F8</color>
+    <color name="color_F3F3F3">#F3F3F3</color>
+    <color name="color_4273ff">#4273ff</color>
+    <color name="color_1a000000">#1a000000</color>
+</resources>

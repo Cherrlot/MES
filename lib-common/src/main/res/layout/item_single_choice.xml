@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="bean"
+            type="com.zhizhunbao.lib.common.dialog.SingleChoiceBean" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/DIMEN_17DP"
+            android:paddingHorizontal="@dimen/DIMEN_10DP"
+            android:layout_marginVertical="@dimen/DIMEN_5DP"
+            android:background="@drawable/shape_white_r5_bg">
+
+            <CheckBox
+                android:id="@+id/cb_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/DIMEN_12DP"
+                android:background="@android:color/transparent"
+                android:button="@null"
+                android:clickable="false"
+                android:focusable="false"
+                android:drawableStart="@drawable/select_check_box"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/DIMEN_10DP"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/DIMEN_17SP"
+                android:text="@{bean.name}"
+                android:textColor="@color/app_black"
+                app:layout_constraintStart_toEndOf="@id/cb_check"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="萝卜排骨汤" />
+
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/text_00_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_order_status"
+                tools:text="10"/>
+
+            <TextView
+                android:id="@+id/tv_order_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginEnd="@dimen/DIMEN_10DP"
+                style="@style/text_00_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
