@@ -63,7 +63,7 @@ const val BUS_NOTIFY_LIST_REFRESH = "notify_refresh"
 const val BUS_NOTIFY_COUNT_REFRESH = "notify_count_refresh"
 /** 通知健康证刷新 */
 const val BUS_HEALTH_REFRESH = "health_refresh"
-/** 通知每日自检刷新 */
-const val BUS_SELF_CHECK_REFRESH = "self_check_refresh"
+/** 重新连接打印机 */
+const val BUS_RECONNECT_PRINTER = "reconnect_printer"
 /** 跳转登录界面 */
 const val BUS_LOGIN = "goto_login"

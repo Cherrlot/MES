@@ -9,14 +9,16 @@ import android.content.Intent
 import android.content.IntentFilter
 import com.zhizhunbao.lib.common.CommonApplication
 import com.zhizhunbao.lib.common.bean.DeviceInformation
+import com.zhizhunbao.lib.common.constant.SdkValue.Sleeptime_C
 import com.zhizhunbao.lib.common.dialog.SingleChoiceDialog
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.lib.common.ext.toast
 import com.zhizhunbao.lib.common.log.AppLog
-import com.zhizhunbao.lib.common.util.MathUtils
+import com.zhizhunbao.lib.common.util.NetumUtil
 import com.zhizhunbao.lib.common.util.ThreadFactory
 import java.io.IOException
 import java.io.InputStream
+import java.io.OutputStream
 import java.lang.ref.WeakReference
 import java.util.UUID
 
@@ -30,7 +32,7 @@ object BluetoothManager {
     private var mDevice: BluetoothDevice? = null
     private var mBluetoothSocket: BluetoothSocket? = null
     private val mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") //蓝牙串口服务的UUID
-
+    private var mOutputStream: OutputStream? = null
     /**
      * 是否开始读数
      */
@@ -48,6 +50,8 @@ object BluetoothManager {
     private var mResultListener: ((String)-> Unit)? = null
 
     private var mOnErrorListener: ((String)-> Unit)? = null
+
+    private var mOnStatusChangeListener: BluetoothStatusChangeListener? = null
 
     fun builder(dialog: SingleChoiceDialog): BluetoothManager {
         mIsRead = true
@@ -77,6 +81,11 @@ object BluetoothManager {
             mIsStart = false
             "设备不支持蓝牙功能".toast()
         }
+        return this
+    }
+
+    fun addStatusChangeListener(listener: BluetoothStatusChangeListener): BluetoothManager {
+        mOnStatusChangeListener = listener
         return this
     }
 
@@ -159,6 +168,13 @@ object BluetoothManager {
     }
 
     /**
+     * 获取设备信息
+     */
+    fun getDevicesInfo(index: Int) : DeviceInformation {
+        return mDatas[index]
+    }
+
+    /**
      * 与目标设备建立连接
      */
     fun connectDevice(index: Int) {
@@ -176,12 +192,14 @@ object BluetoothManager {
                     //开启接收数据的线程
                     mThread = ReceiveDataThread(mBluetoothSocket)
                     mThread?.start()
+                    mOutputStream = mBluetoothSocket?.outputStream
+                    mOnStatusChangeListener?.onConnect()
                 } else {
                     "连接失败，结束重进".toast()
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
-                "蓝牙连接失败，请确认电子秤蓝牙打开，且没有被其他设备连接".toast()
+                "蓝牙连接失败，请确认蓝牙设备蓝牙打开，且没有被其他设备连接".toast()
                 try {
                     mBluetoothSocket?.close()
                 } catch (ioException: IOException) {
@@ -230,6 +248,12 @@ object BluetoothManager {
         }
     }
 
+    fun sendCommand(command: String) {
+        AppLog.d("发送指令：$command")
+        mOutputStream?.write(NetumUtil.getCommandBtye(command))
+        mOutputStream?.flush()
+    }
+
     /**
      * 负责接收数据的线程
      */
@@ -247,72 +271,63 @@ object BluetoothManager {
 
         override fun run() {
             super.run()
+            typeOne()
+        }
+
+        private fun typeOne() {
             try{
-                // 约定好的停止位
-                val stopString = "="
-                var result = ByteArray(0)
+                var bytes: Int
                 val buffer = ByteArray(256)
                 while (mIsRead) {
                     try {
-                        val num = inputStream?.read(buffer).safe()
-                        val temp = ByteArray(result.size + num)
-                        System.arraycopy(result, 0, temp, 0, result.size)
-                        System.arraycopy(buffer, 0, temp, result.size, num)
-                        result = temp
-                        // 返回数据
-//                        AppLog.d("当前累计收到的数据=>" + MathUtils.byte2Hex(result))
-                        val stopFlag: ByteArray = stopString.toByteArray()
-                        val stopFlagSize = stopFlag.size
-                        var shouldCallOnReceiveBytes = false
-//                        AppLog.d("标志位为：" + MathUtils.byte2Hex(stopFlag))
-                        for (i in stopFlagSize - 1 downTo 0) {
-                            val indexInResult: Int = result.size - (stopFlagSize - i)
-                            if (indexInResult >= result.size || indexInResult < 0) {
-                                shouldCallOnReceiveBytes = false
-//                                AppLog.d("收到的数据比停止字符串短")
-                                break
+                        if (inputStream?.read(buffer).safe().also {
+                                bytes = it
+                            } > 0) {
+                            val bufData = ByteArray(bytes)
+                            for (i in 0 until bytes) {
+                                bufData[i] = buffer[i]
                             }
-                            shouldCallOnReceiveBytes = stopFlag[i] == result[indexInResult]
-                        }
-                        if (shouldCallOnReceiveBytes && mIsStart) {
-                            // 到了这里，byte 数组 result 就是收到的数据了
-//                            AppLog.d("result为：" + MathUtils.byte2Hex(result))
-                            mResultListener?.invoke(getResultString(MathUtils.byte2Hex(result)))
-                            // 清空之前的
-                            result = ByteArray(0)
+                            if (bufData.isNotEmpty()) {
+                                val result = getScanGunResult(bufData)
+                                if (!result.isNullOrBlank())
+                                    mOnErrorListener?.invoke(result)
+                            }
                         }
                     } catch (e: java.lang.Exception) {
                         onDestroy()
-                        mOnErrorListener?.invoke("电子秤连接中断，请重新连接电子秤后尝试")
+                        mOnErrorListener?.invoke("扫码枪连接中断，请重新连接扫码枪后尝试")
                         mOnErrorListener = null
                     }
                 }
             } catch (e: Exception) {
                 onDestroy()
-                mOnErrorListener?.invoke("电子秤连接中断，请重新连接电子秤后尝试")
+                mOnErrorListener?.invoke("扫码枪连接中断，请重新连接扫码枪后尝试")
                 mOnErrorListener = null
             }
         }
 
-        private fun getResultString(hexString: String): String {
-            // 反向净重数据，一帧为8组 30302E303030303D
-            // 符号位，30为正数，2d为负数
-            val symbol = hexString.substring(12, 14)
-            var result = if (symbol == "2D") "-" else ""
-            // 百位
-            result = result.plus(hexString.substring(11, 12))
-            // 十位
-            result = result.plus(hexString.substring(9, 10))
-            // 个位
-            result = result.plus(hexString.substring(7, 8))
-            // 小数点
-            result = result.plus(".")
-            // 小数点后一位
-            result = result.plus(hexString.substring(3, 4))
-            // 小数点后二位
-            result = result.plus(hexString.substring(1, 2))
-
-            return result
+        /**
+         * 将ASCII转为条形码
+         */
+        private fun getScanGunResult(bufData: ByteArray): String? {
+            val end = bufData[bufData.size - 1].toInt()
+            if (end != 13 || bufData.size <= 2)
+                return null
+            val sb = StringBuffer()
+            for (element in bufData) {
+                val data = element.toInt()
+                if (data == 13)
+                    break
+                else if (data >= 48){
+                    sb.append(data - 48)
+                }
+            }
+            AppLog.d("result为：$sb")
+            return sb.toString()
         }
     }
+}
+
+interface BluetoothStatusChangeListener {
+    fun onConnect()
 }

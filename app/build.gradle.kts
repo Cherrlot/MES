@@ -109,6 +109,7 @@ android {
 dependencies {
     implementation(project(":lib-common"))
     implementation(project(":module-login"))
+    implementation(project(":module-gpsdk"))
     implementation(project(":module-mine"))
     implementation(project(":module-board"))
     implementation(libs.core.ktx)

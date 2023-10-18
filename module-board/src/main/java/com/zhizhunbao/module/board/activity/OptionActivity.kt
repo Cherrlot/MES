@@ -10,8 +10,13 @@ import com.zhizhunbao.lib.common.bean.OptionItemBean
 import com.zhizhunbao.lib.common.bean.OptionListBean
 import com.zhizhunbao.lib.common.constant.ACTION_OPTION
 import com.zhizhunbao.lib.common.constant.ACTION_OPTION_LIST
+import com.zhizhunbao.lib.common.constant.SdkValue
+import com.zhizhunbao.lib.common.dialog.SingleChoiceDialog
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.lib.common.ext.setOnThrottleClickListener
+import com.zhizhunbao.lib.common.ext.toast
+import com.zhizhunbao.lib.common.manager.BluetoothManager
+import com.zhizhunbao.lib.common.manager.BluetoothStatusChangeListener
 import com.zhizhunbao.module.board.R
 import com.zhizhunbao.module.board.adapter.OptionInfoAdapter
 import com.zhizhunbao.module.board.adapter.OptionInfoChildAdapter
@@ -35,21 +40,54 @@ class OptionActivity : BaseAppActivity<OptionViewModel, ActivityOptionBinding>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_option)
 
+        initBluetooth()
+
         mRootView = mBinding.clContent
 
         mBinding.mRecyclerView.layoutManager = LinearLayoutManager(this)
         mBinding.mRecyclerView.adapter = mAdapter
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            viewModel.mOptionListBean.value = intent.getParcelableExtra(ACTION_OPTION_LIST, OptionListBean::class.java)
+            viewModel.mOptionListBean.value =
+                intent.getParcelableExtra(ACTION_OPTION_LIST, OptionListBean::class.java)
         } else {
             viewModel.mOptionListBean.value = intent.getParcelableExtra(ACTION_OPTION_LIST)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            viewModel.mOptionBean.value = intent.getParcelableExtra(ACTION_OPTION, OptionBean::class.java)
+            viewModel.mOptionBean.value =
+                intent.getParcelableExtra(ACTION_OPTION, OptionBean::class.java)
         } else {
             viewModel.mOptionBean.value = intent.getParcelableExtra(ACTION_OPTION)
         }
+    }
+
+    private fun initBluetooth() {
+        BluetoothManager.builder(SingleChoiceDialog(this).apply {
+            setTitle("请选择扫码枪")
+            setPositiveButton(listener = {
+                BluetoothManager.connectDevice(it)
+            })
+            setNegativeButton(listener = {
+                BluetoothManager.cancelDiscovery()
+            })
+            setCanceledOnTouchOutside(false)
+        }).addStatusChangeListener(object :
+            BluetoothStatusChangeListener {
+            override fun onConnect() {
+                // 永不休眠
+                BluetoothManager.sendCommand(SdkValue.Sleeptime_I)
+            }
+        }).startRead(resultListener = { code ->
+            // 扫码提交
+            viewModel.scanAndSubmit(code)
+        }, onError = {
+            viewModel.showLoading()
+            mRootView?.postDelayed({
+                viewModel.hideLoading()
+                initBluetooth()
+            }, 500)
+            it.toast()
+        })
     }
 
     private fun initView() {

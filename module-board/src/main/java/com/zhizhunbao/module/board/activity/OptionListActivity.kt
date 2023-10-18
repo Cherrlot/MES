@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.launcher.ARouter
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.zhizhunbao.lib.common.base.BaseAppActivity
 import com.zhizhunbao.lib.common.bean.OptionBean
@@ -14,6 +15,7 @@ import com.zhizhunbao.lib.common.constant.BUS_REFRESH_OPTION
 import com.zhizhunbao.lib.common.ext.startTargetActivity
 import com.zhizhunbao.lib.common.net.constant.State
 import com.zhizhunbao.lib.common.net.constant.StateType
+import com.zhizhunbao.lib.common.router.ROUTER_PATH_GPSDK
 import com.zhizhunbao.module.board.R
 import com.zhizhunbao.module.board.adapter.OptionListAdapter
 import com.zhizhunbao.module.board.databinding.ActivityOptionListBinding

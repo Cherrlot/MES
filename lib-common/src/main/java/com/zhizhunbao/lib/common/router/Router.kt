@@ -22,8 +22,8 @@ const val ROUTER_GROUP_PAPERS = "/papers"
 /** 路由组 - selfCheck */
 const val ROUTER_GROUP_SELF_CHECK = "/selfCheck"
 
-/** 路由组 - retention */
-const val ROUTER_GROUP_RETENTION = "/retention"
+/** 路由组 - gpsdk */
+const val ROUTER_GROUP_GPSDK = "/gpsdk"
 
 /** 路由组 - retention  record*/
 const val ROUTER_GROUP_RECORD = "/record"
@@ -55,8 +55,8 @@ const val ROUTER_PATH_LOGIN = "$ROUTER_GROUP_LOGIN/LoginActivity"
 /** 主界面 看板列表 BoardFragment*/
 const val ROUTER_PATH_BOARD_ACTIVITY = "$ROUTER_GROUP_HOME/BoardFragment"
 
-/** 主界面 菜品添加/编辑 */
-const val ROUTER_PATH_OPTION_EDIT = "$ROUTER_GROUP_HOME/EditDishActivity"
+/** 蓝牙打印机 */
+const val ROUTER_PATH_GPSDK = "$ROUTER_GROUP_GPSDK/GpsdkMainActivity"
 
 /** 主界面 菜品类型管理 DishTypeActivity*/
 const val ROUTER_PATH_DISH_TYPE_ACTIVITY = "$ROUTER_GROUP_HOME/DishTypeActivity"

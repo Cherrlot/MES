@@ -7,6 +7,7 @@ import com.zhizhunbao.lib.common.constant.BUS_REFRESH_OPTION
 import com.zhizhunbao.lib.common.constant.BUS_REFRESH_WORK_ORDER
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.lib.common.log.AppLog
+import com.zhizhunbao.lib.common.manager.PrintBluetoothManager
 import com.zhizhunbao.lib.common.mmkv.AppLocalData
 import com.zhizhunbao.lib.common.net.constant.TIME_OUT
 import okhttp3.OkHttpClient
@@ -15,13 +16,16 @@ import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
+import org.json.JSONObject
+import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
+import java.util.Vector
 import java.util.concurrent.TimeUnit
 
 
 object AppWebsocket {
     private var mWebSocket: WebSocket? = null
-
+    private val Command: Vector<Byte> = Vector<Byte>()
     var mIsConnect = false
 
     private val mHandler = Handler(Looper.getMainLooper())
@@ -97,16 +101,43 @@ object AppWebsocket {
         }
     }
 
+    @Synchronized
     private fun handleMsg(msg: String) {
-        if (msg.contains("refresh")) {
-            // 刷新工单列表,和进去工单列表的明细信息
-            LiveEventBus.get(BUS_REFRESH_WORK_ORDER).post(true)
-            LiveEventBus.get(BUS_REFRESH_OPTION).post(true)
-        } else if (msg.contains("print")) {
-            // 蓝牙打印
+        try {
+            val js =  JSONObject(msg)
+            val command: String = js.getString("command")
+            val result = js.getJSONArray("result")
+            if (command.contains("refresh")) {
+                // 刷新工单列表,和进去工单列表的明细信息
+                LiveEventBus.get(BUS_REFRESH_WORK_ORDER).post(true)
+                LiveEventBus.get(BUS_REFRESH_OPTION).post(true)
+            } else if (command.contains("print") && result.length() > 0) {
+                // 蓝牙打印
+                for (i in 0 until result.length()) {
+                    val s = result.get(i).toString().plus("\r\n")
+                    AppLog.d("AppWebsocket收到print消息:$s")
+                    addStrToCommand(s)
+                }
+                PrintBluetoothManager.sendCommand(Command)
+                Command.clear()
+            }
+        } catch (e: Exception) {
+            AppLog.e("AppWebsocket解析失败：${e.message}")
         }
     }
-
+    private fun addStrToCommand(str: String) {
+        var bs: ByteArray? = null
+        if (str != "") {
+            try {
+                bs = str.toByteArray(charset("GB2312"))
+            } catch (var4: UnsupportedEncodingException) {
+                var4.printStackTrace()
+            }
+            for (i in bs!!.indices) {
+                this.Command.add(bs[i])
+            }
+        }
+    }
     /**
      * WS发送消息
      *
