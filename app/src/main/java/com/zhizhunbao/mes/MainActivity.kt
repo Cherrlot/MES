@@ -17,6 +17,7 @@ import com.zhizhunbao.lib.common.constant.BUS_RECONNECT_PRINTER
 import com.zhizhunbao.lib.common.dialog.SingleChoiceDialog
 import com.zhizhunbao.lib.common.ext.toast
 import com.zhizhunbao.lib.common.jpush.PushUtil
+import com.zhizhunbao.lib.common.log.AppLog
 import com.zhizhunbao.lib.common.manager.BluetoothManager
 import com.zhizhunbao.lib.common.manager.BluetoothStatusChangeListener
 import com.zhizhunbao.lib.common.manager.PrintBluetoothManager
@@ -65,6 +66,7 @@ class MainActivity : BaseAppActivity<MainViewModel, ActivityMainBinding>() {
 
         initBluetooth()
 
+        AppLog.d("AppLocalData.machineNo:${AppLocalData.machineNo}")
         if (AppLocalData.machineNo.isNotEmpty()) {
             // 开启websocket
             AppWebsocket.appWebsocketConnect()

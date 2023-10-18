@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="true" />
+    <application
+        android:allowBackup="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.zhizhunbao.module.gpsdk.GpsdkMainActivity"
+            android:exported="true"/>
+        <activity
+            android:name="com.zhizhunbao.module.gpsdk.UsbDeviceList"
+            android:exported="true"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.zhizhunbao.module.gpsdk.SerialPortList"
+            android:exported="true"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
+        <activity android:name="com.zhizhunbao.module.gpsdk.ConnMoreDevicesActivity"
+            android:exported="true"/>
+    </application>
+</manifest>
