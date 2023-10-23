@@ -9,7 +9,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import com.zhizhunbao.lib.common.CommonApplication
 import com.zhizhunbao.lib.common.bean.DeviceInformation
-import com.zhizhunbao.lib.common.constant.SdkValue.Sleeptime_C
 import com.zhizhunbao.lib.common.dialog.SingleChoiceDialog
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.lib.common.ext.toast
@@ -20,6 +19,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 import java.lang.ref.WeakReference
+import java.nio.charset.Charset
 import java.util.UUID
 
 object BluetoothManager {
@@ -33,6 +33,9 @@ object BluetoothManager {
     private var mBluetoothSocket: BluetoothSocket? = null
     private val mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") //蓝牙串口服务的UUID
     private var mOutputStream: OutputStream? = null
+
+    @set:Synchronized
+    private var mReadContent = ""
     /**
      * 是否开始读数
      */
@@ -43,13 +46,13 @@ object BluetoothManager {
      */
     private var mIsRead = true
 
-    private var mThread : ReceiveDataThread? = null
+    private var mThread: ReceiveDataThread? = null
 
     private var mDialog: WeakReference<SingleChoiceDialog>? = null
 
-    private var mResultListener: ((String)-> Unit)? = null
+    private var mResultListener: ((String) -> Unit)? = null
 
-    private var mOnErrorListener: ((String)-> Unit)? = null
+    private var mOnErrorListener: ((String) -> Unit)? = null
 
     private var mOnStatusChangeListener: BluetoothStatusChangeListener? = null
 
@@ -89,7 +92,7 @@ object BluetoothManager {
         return this
     }
 
-    fun startRead(resultListener: ((String)-> Unit)?, onError: ((String)-> Unit)?) {
+    fun startRead(resultListener: ((String) -> Unit)?, onError: ((String) -> Unit)?) {
         mResultListener = resultListener
         mOnErrorListener = onError
         mIsStart = true
@@ -170,7 +173,7 @@ object BluetoothManager {
     /**
      * 获取设备信息
      */
-    fun getDevicesInfo(index: Int) : DeviceInformation {
+    fun getDevicesInfo(index: Int): DeviceInformation {
         return mDatas[index]
     }
 
@@ -275,22 +278,33 @@ object BluetoothManager {
         }
 
         private fun typeOne() {
-            try{
+            try {
                 var bytes: Int
-                val buffer = ByteArray(256)
+
                 while (mIsRead) {
                     try {
+                        val buffer = ByteArray(128)
                         if (inputStream?.read(buffer).safe().also {
                                 bytes = it
                             } > 0) {
+                            val s = String(buffer, 0, bytes, Charset.forName("GBK"))
+                            if (s.contains("\b\u000B")) {
+                                AppLog.d("蓝牙第一次读取，为无效内容")
+                                mReadContent = ""
+                                continue
+                            }
+                            mReadContent += s
+
                             val bufData = ByteArray(bytes)
                             for (i in 0 until bytes) {
                                 bufData[i] = buffer[i]
                             }
-                            if (bufData.isNotEmpty()) {
-                                val result = getScanGunResult(bufData)
-                                if (!result.isNullOrBlank())
-                                    mOnErrorListener?.invoke(result)
+                            val endByte = bufData[bufData.size - 1].toInt()
+                            AppLog.d("蓝牙读取内容为：$s num: $endByte")
+                            if (endByte == 13) {
+                                // 结束读取
+                                mResultListener?.invoke(mReadContent)
+                                mReadContent = ""
                             }
                         }
                     } catch (e: java.lang.Exception) {
@@ -318,7 +332,7 @@ object BluetoothManager {
                 val data = element.toInt()
                 if (data == 13)
                     break
-                else if (data >= 48){
+                else if (data >= 48) {
                     sb.append(data - 48)
                 }
             }

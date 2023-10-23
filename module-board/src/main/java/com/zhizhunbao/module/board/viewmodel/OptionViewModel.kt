@@ -8,6 +8,7 @@ import com.zhizhunbao.lib.common.constant.BUS_REFRESH_OPTION
 import com.zhizhunbao.lib.common.constant.BUS_REFRESH_WORK_ORDER
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.lib.common.ext.toast
+import com.zhizhunbao.lib.common.mmkv.AppLocalData
 import com.zhizhunbao.lib.common.net.constant.State
 import com.zhizhunbao.lib.common.net.constant.StateType
 import com.zhizhunbao.lib.common.net.initiateRequest
@@ -45,6 +46,7 @@ class OptionViewModel : BaseViewModel() {
         jsonObject.put("Id", mOptionBean.value?.Id)
         jsonObject.put("Status", mOptionListBean.value?.No)
         jsonObject.put("code", code)
+        jsonObject.put("machine", AppLocalData.machineNo)
         mOptionListBean.value?.Items?.let { options ->
             options.forEach { optionItemBean ->
                 when (optionItemBean.type) {

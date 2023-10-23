@@ -342,11 +342,11 @@ object PrintBluetoothManager {
                             for (i in 0 until bytes) {
                                 bufData[i] = buffer[i]
                             }
-                            AppLog.e("printer read buffer: ${bufData.toString()}")
+                            AppLog.e("printer read buffer: $bufData")
                             if (bufData.isNotEmpty()) {
                                 val result = getScanGunResult(bufData)
                                 if (!result.isNullOrBlank())
-                                    mOnErrorListener?.invoke(result)
+                                    mResultListener?.invoke(result)
                             }
                         }
                     } catch (e: java.lang.Exception) {

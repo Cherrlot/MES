@@ -5,23 +5,6 @@ package com.zhizhunbao.lib.common.constant;
  */
 public class SdkValue {
 
-    //eventbus type
-    //收到消息
-    public final static int SdkMessageType_Receve = 101;
-    //发出指令
-    public final static int SdkMessageType_Send = 102;
-    //断开spp蓝牙并停止服务
-    public final static int getSdkMessageType_DisSppBluetoothAndServce = 103;
-    //断开ble蓝牙并停止服务
-    public final static int getSdkMessageType_DisBleBluetoothAndServce = 104;
-    //
-    public final static int SdkMessageType_ConnectUsb = 105;
-
-    //蓝牙连接成功
-    public final static int connectbt_success = 106;
-    //蓝牙连接失败
-    public final static int connectbt_fail = 107;
-
     public final static String MODELSTYLE_SE4750 = "SE4750";
 
     public final static String MODELSTYLE_NT_C06H = "NT-C06H";

@@ -15,6 +15,7 @@ import com.zhizhunbao.lib.common.dialog.SingleChoiceDialog
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.lib.common.ext.setOnThrottleClickListener
 import com.zhizhunbao.lib.common.ext.toast
+import com.zhizhunbao.lib.common.log.AppLog
 import com.zhizhunbao.lib.common.manager.BluetoothManager
 import com.zhizhunbao.lib.common.manager.BluetoothStatusChangeListener
 import com.zhizhunbao.module.board.R
@@ -79,6 +80,7 @@ class OptionActivity : BaseAppActivity<OptionViewModel, ActivityOptionBinding>()
             }
         }).startRead(resultListener = { code ->
             // 扫码提交
+            AppLog.d("扫码提交：$code")
             viewModel.scanAndSubmit(code)
         }, onError = {
             viewModel.showLoading()
