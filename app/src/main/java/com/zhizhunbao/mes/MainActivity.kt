@@ -29,15 +29,12 @@ import com.zhizhunbao.lib.common.tool.string
 import com.zhizhunbao.lib.common.util.AppManager
 import com.zhizhunbao.lib.common.websocket.AppWebsocket
 import com.zhizhunbao.mes.databinding.ActivityMainBinding
-import com.zhizhunbao.module.gpsdk.DeviceConnFactoryManager
-import com.zhizhunbao.module.gpsdk.PrintManager
-import com.zhizhunbao.module.gpsdk.ThreadPool
 import java.io.UnsupportedEncodingException
-import java.nio.charset.Charset
 import java.util.Vector
 
 @Route(path = ROUTER_PATH_MAIN)
 class MainActivity : BaseAppActivity<MainViewModel, ActivityMainBinding>() {
+    private val Command: Vector<Byte> = Vector<Byte>()
 
     /** 上次返回点击时间 */
     private var mExitTime = 0L
@@ -73,45 +70,6 @@ class MainActivity : BaseAppActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
-    /**
-     * 连接蓝牙打印机
-     */
-//    private fun initBluetooth() {
-//        BluetoothManager.builder(SingleChoiceDialog(this).apply {
-//            setTitle("请选择蓝牙打印机")
-//            setPositiveButton(listener = {
-//                val macAddress = BluetoothManager.getDevicesInfo(it).address
-//                /* 初始化话DeviceConnFactoryManager */
-//                DeviceConnFactoryManager.Build()
-//                .setId(0)
-//                /* 设置连接方式 */
-//                .setConnMethod(DeviceConnFactoryManager.CONN_METHOD.BLUETOOTH)
-//                /* 设置连接的蓝牙mac地址 */
-//                .setMacAddress(macAddress)
-//                .build()
-//                /* 打开端口 */
-//                val threadPool = ThreadPool.getInstantiation()
-//                threadPool.addTask { DeviceConnFactoryManager.getDeviceConnFactoryManagers()[0].openPort() }
-//                mBinding.navView.postDelayed({
-//                    PrintManager.selfTest()
-////                    val sb = StringBuilder()
-////                    addStrToCommand("SIZE 40 mm,30 mm\r\n")
-////                    addStrToCommand("DIRECTION 1,0\r\n")
-////                    addStrToCommand("REFERENCE 0,0\r\n")
-////                    addStrToCommand("CLS\r\n")
-////                    addStrToCommand("TEXT 10,0,\"TSS24.BF2\",0,1,1,\"Welcome to use SMARNET printer\"\r\n")
-////                    addStrToCommand("PRINT 1,1\r\n")
-////                    addStrToCommand("SOUND 2,100\r\n")
-////                    DeviceConnFactoryManager.getDeviceConnFactoryManagers()[0].sendDataImmediately(Command)
-//                }, 500)
-//            })
-//            setNegativeButton(listener = {
-//                BluetoothManager.cancelDiscovery()
-//            })
-//            setCanceledOnTouchOutside(false)
-//        })
-//    }
-
     private fun initBluetooth() {
         PrintBluetoothManager.builder(SingleChoiceDialog(this).apply {
             setTitle("请选择蓝牙打印机")
@@ -123,30 +81,40 @@ class MainActivity : BaseAppActivity<MainViewModel, ActivityMainBinding>() {
             })
             setCanceledOnTouchOutside(false)
         })
-//            .addStatusChangeListener(object :
-//            BluetoothStatusChangeListener {
-//            override fun onConnect() {
-//                // 修改为cpcl模式
-////                for (i in PrintBluetoothManager.mCpclMode.indices) {
-////                    Command.add(PrintBluetoothManager.mCpclMode[i])
-////                }
-////                PrintBluetoothManager.sendCommand(Command)
-////                Command.clear()
-////                addStrToCommand("SOUND 2,100\r\n")
-////                PrintBluetoothManager.sendCommand(Command)
-////                PrintBluetoothManager.changeMode(PrintBluetoothManager.mCpclMode)
-//                addStrToCommand("SIZE 40 mm,30 mm\r\nDIRECTION 1,0\r\nREFERENCE 0,0\r\nCLS\r\nTEXT 10,0,\"TSS24.BF2\",0,1,1,\"Welcome to use SMARNET printer\"\r\nPRINT 1,1\r\nSOUND 2,100\r\n")
-//                PrintBluetoothManager.sendCommand(Command)
-//            }
-//        })
+            .addStatusChangeListener(object :
+                BluetoothStatusChangeListener {
+                override fun onConnect() {
+                    addStrToCommand("SIZE 40 mm,30 mm\r\nGAP 2 mm,0 mm\r\n")
+                    addStrToCommand("HOME\r\n")
+//                addStrToCommand("ERASE 0,0,320,240\r\n")
+//                addStrToCommand("QRCODE 0,0,M,4,A,0,\"eyJJZCI6IjkzNDQ1Njg0NTQxMjYwMTg1NyIsIm1hY2hpbmUiOiJQTTAzIiwicXR5IjozMDAwLCJrZXkxIjoiMTQwMCIsImtleTIiOiIwLjA0NyJ9Cg==\"\r\n")
+//                addStrToCommand("PRINT 1\r\n")
+                    PrintBluetoothManager.sendCommand(Command)
+                    Command.clear()
+                }
+            })
             .startRead(resultListener = {}, onError = {
-            viewModel.showLoading()
-            mBinding.navView.postDelayed({
-                viewModel.hideLoading()
-                initBluetooth()
-            }, 500)
-            it.toast()
-        })
+                viewModel.showLoading()
+                mBinding.navView.postDelayed({
+                    viewModel.hideLoading()
+                    initBluetooth()
+                }, 500)
+                it.toast()
+            })
+    }
+
+    private fun addStrToCommand(str: String) {
+        var bs: ByteArray? = null
+        if (str != "") {
+            try {
+                bs = str.toByteArray(charset("GB2312"))
+            } catch (var4: UnsupportedEncodingException) {
+                var4.printStackTrace()
+            }
+            for (i in bs!!.indices) {
+                this.Command.add(bs[i])
+            }
+        }
     }
 
     private fun resetOptionItem(optionItem: MenuItem?) {
