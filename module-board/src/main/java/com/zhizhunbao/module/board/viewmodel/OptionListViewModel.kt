@@ -56,6 +56,7 @@ class OptionListViewModel : BaseViewModel() {
                 if (it.isNullOrEmpty()) {
                     mTotalPage = mPage
                 }
+                mOptionBean = it?.get(0)
                 mOptionList.value = it?.get(0)?.steps ?: mutableListOf()
 
                 // 显示空数据页或者隐藏错误页

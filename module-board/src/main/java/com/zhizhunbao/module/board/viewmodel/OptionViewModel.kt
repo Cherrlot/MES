@@ -68,6 +68,7 @@ class OptionViewModel : BaseViewModel() {
                 LiveEventBus.get(BUS_REFRESH_OPTION).post(true)
                 hideLoading()
                 "提交成功".toast()
+                mFinishLiveData.value = true
             },
             failed = { s: String?, _: StateType ->
                 hideLoading()

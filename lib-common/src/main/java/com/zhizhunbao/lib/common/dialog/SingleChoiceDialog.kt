@@ -45,7 +45,7 @@ class SingleChoiceDialog(var context: Activity) {
 
         //设置布局
         titleView = view.findViewById(R.id.tv_title)
-        messageView = view.findViewById(R.id.tv_content)
+//        messageView = view.findViewById(R.id.tv_content)
         cancelView = view.findViewById(R.id.tv_cancel)
         confirmView = view.findViewById(R.id.tv_ok)
         mRecyclerView = view.findViewById(R.id.mRecyclerView)
@@ -241,7 +241,11 @@ class SingleChoiceAdapter: BaseAppAdapter<ItemSingleChoiceBinding, SingleChoiceB
         if (checkIndexList.contains(position)) {
             return
         } else {
-            checkIndexList.clear()
+            if (checkIndexList.size > 0) {
+                val lastPosition = checkIndexList[0]
+                checkIndexList.clear()
+                notifyItemChanged(lastPosition)
+            }
             checkIndexList.add(position)
         }
         notifyItemChanged(position)

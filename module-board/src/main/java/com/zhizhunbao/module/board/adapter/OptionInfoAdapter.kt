@@ -23,7 +23,7 @@ class OptionInfoAdapter:
             mBinding.mItemRecyclerView.layoutManager = LinearLayoutManager(context)
             val adapter = OptionInfoChildAdapter()
             mBinding.mItemRecyclerView.adapter = adapter
-            adapter.setList(data.items)
+            adapter.setList(data.item)
         }
     }
 }

@@ -20,7 +20,6 @@ import com.zhizhunbao.lib.common.manager.BluetoothManager
 import com.zhizhunbao.lib.common.manager.BluetoothStatusChangeListener
 import com.zhizhunbao.module.board.R
 import com.zhizhunbao.module.board.adapter.OptionInfoAdapter
-import com.zhizhunbao.module.board.adapter.OptionInfoChildAdapter
 import com.zhizhunbao.module.board.databinding.ActivityOptionBinding
 import com.zhizhunbao.module.board.view.OptionCheckView
 import com.zhizhunbao.module.board.view.OptionInputView
@@ -145,7 +144,7 @@ class OptionActivity : BaseAppActivity<OptionViewModel, ActivityOptionBinding>()
     override fun initObserve() {
         viewModel.mOptionBean.observe(this) {
             mBinding.workOrder.bean = it
-            mAdapter.setList(it?.Info)
+            mAdapter.setList(it?.info)
         }
         viewModel.mOptionListBean.observe(this) {
             initView()

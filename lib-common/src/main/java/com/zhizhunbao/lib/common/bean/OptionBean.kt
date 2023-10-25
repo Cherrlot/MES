@@ -22,7 +22,7 @@ data class OptionBean(
     var Orderno: String? = null,
     var Product: String? = null,
     var Remark: String? = null,
-    var Info: MutableList<OptionInfoBean>? = null,
+    var info: MutableList<OptionInfoBean>? = null,
     var Seq: Int? = null,
     var Plan: Int? = null,
     var Finish: Int? = null,
@@ -66,11 +66,12 @@ data class OptionItemBean(
 @Parcelize
 data class OptionInfoBean(
     var group: String? = null,
-    var items: MutableList<OptionInfoItemBean>? = null,
+    var item: MutableList<OptionInfoItemBean>? = null,
 ): Parcelable
 
 @Parcelize
 data class OptionInfoItemBean(
     var content: String? = null,
     var label: String? = null,
+    var date: String? = null,
 ): Parcelable
