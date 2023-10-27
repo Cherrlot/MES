@@ -2,8 +2,8 @@
 minSdk = "24"
 compileSdk = "33"
 targetSdk ="30"
-versionCode = "2023081601"
-versionName = "1.0.1"
+versionCode = "2023102601"
+versionName = "1.0.2"
 # 0为本地环境  1为测试环境  2为线上环境 3为打印日志的线上环境
 netControl = "3"
 localApi = "\"http://10.20.11.114\""
