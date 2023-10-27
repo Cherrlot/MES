@@ -66,7 +66,9 @@ data class OptionItemBean(
 @Parcelize
 data class OptionInfoBean(
     var group: String? = null,
-    var item: MutableList<OptionInfoItemBean>? = null,
+    var time: MutableList<String>? = null,
+    var label: String? = null,
+    var date: String? = null,
 ): Parcelable
 
 @Parcelize

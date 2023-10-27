@@ -1,5 +1,6 @@
 package com.zhizhunbao.module.board.adapter
 
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zhizhunbao.lib.common.base.BaseAppAdapter
 import com.zhizhunbao.lib.common.base.BaseViewHolder
@@ -23,7 +24,14 @@ class OptionInfoAdapter:
             mBinding.mItemRecyclerView.layoutManager = LinearLayoutManager(context)
             val adapter = OptionInfoChildAdapter()
             mBinding.mItemRecyclerView.adapter = adapter
-            adapter.setList(data.item)
+            adapter.setList(data.time)
+            if (holder.absoluteAdapterPosition == 0) {
+                mBinding.d2.visibility = View.VISIBLE
+                mBinding.d1.visibility = View.GONE
+            } else {
+                mBinding.d2.visibility = View.GONE
+                mBinding.d1.visibility = View.VISIBLE
+            }
         }
     }
 }

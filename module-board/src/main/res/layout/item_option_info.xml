@@ -13,37 +13,58 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/DIMEN_10DP"
-        android:layout_marginVertical="@dimen/DIMEN_15DP"
-        android:background="@drawable/shape_white_r8_bg"
-        android:elevation="@dimen/DIMEN_10DP"
-        android:minHeight="@dimen/DIMEN_50DP"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvTitle"
-            style="@style/text_00_18"
-            android:layout_width="match_parent"
+            style="@style/text_00_10"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/DIMEN_20DP"
-            android:text="@{bean.group}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{bean.label}"
+            android:layout_marginTop="@dimen/DIMEN_15DP"
+            android:layout_marginStart="@dimen/DIMEN_5DP"
+            app:layout_constraintStart_toEndOf="@id/circle"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="基础" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mItemRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DIMEN_10DP"
+            android:layout_marginTop="@dimen/DIMEN_5DP"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             tools:listitem="@layout/item_option_info_child" />
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/DIMEN_1DP"
-            android:layout_marginTop="@dimen/DIMEN_8DP"
-            android:background="@color/color_969799"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            android:id="@+id/d1"
+            android:layout_width="@dimen/DIMEN_1DP"
+            android:layout_height="0dp"
+            android:background="@color/app_black"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/circle"
+            app:layout_constraintEnd_toEndOf="@id/circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            android:id="@+id/d2"
+            android:layout_width="@dimen/DIMEN_1DP"
+            android:layout_height="0dp"
+            android:background="@color/app_black"
+            app:layout_constraintStart_toStartOf="@id/circle"
+            app:layout_constraintEnd_toEndOf="@id/circle"
+            app:layout_constraintTop_toTopOf="@id/circle"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            android:id="@+id/circle"
+            android:layout_width="@dimen/DIMEN_12DP"
+            android:layout_height="@dimen/DIMEN_12DP"
+            android:background="@drawable/circle_blue"
+            android:layout_marginStart="@dimen/DIMEN_15DP"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTitle"
+            app:layout_constraintBottom_toBottomOf="@id/tvTitle"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

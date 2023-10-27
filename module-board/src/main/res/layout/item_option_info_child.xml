@@ -5,49 +5,42 @@
 
     <data>
 
-        <variable
-            name="bean"
-            type="com.zhizhunbao.lib.common.bean.OptionInfoItemBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/DIMEN_10DP"
-        android:minHeight="@dimen/DIMEN_50DP"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvLabel"
-            style="@style/text_33_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/DIMEN_10DP"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@{bean.label}"
-            tools:text="序号" />
+<!--        <View-->
+<!--            android:layout_width="@dimen/DIMEN_2DP"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/app_black"-->
+<!--            app:layout_constraintStart_toStartOf="@id/circleChild"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/circleChild"/>-->
 
         <TextView
-            android:id="@+id/tvContent"
-            style="@style/text_33_14"
+            android:id="@+id/tvTContent"
+            style="@style/text_00_10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/DIMEN_10DP"
-            android:gravity="end"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvLabel"
+            android:layout_marginStart="@dimen/DIMEN_5DP"
+            android:layout_marginTop="@dimen/DIMEN_5DP"
+            app:layout_constraintStart_toEndOf="@id/circleChild"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{bean.content}"
-            tools:text="PM01" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="基础" />
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/DIMEN_1DP"
-            android:background="@color/color_divider"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:id="@+id/circleChild"
+            android:layout_width="@dimen/DIMEN_12DP"
+            android:layout_height="@dimen/DIMEN_12DP"
+            android:background="@drawable/circle_blue"
+            android:layout_marginStart="@dimen/DIMEN_15DP"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTContent"
+            app:layout_constraintBottom_toBottomOf="@id/tvTContent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
