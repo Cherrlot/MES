@@ -41,10 +41,10 @@ object AppWebsocket {
     }
 
     fun appWebsocketConnect() {
-        val location = "ws://zhizhunbao.51dingdian.com:7000/websocket?token=${AppLocalData.token}"
+        val location = "ws://47.108.176.193:7000/websocket?token=${AppLocalData.token}"
         val request = Request.Builder()
             .url(location)
-            .addHeader("Origin", "http://zhizhunbao.51dingdian.com:7000")
+            .addHeader("Origin", "http://47.108.176.193:7000")
             .build()
         mWebSocket = mClient.newWebSocket(request, WsListener())
     }

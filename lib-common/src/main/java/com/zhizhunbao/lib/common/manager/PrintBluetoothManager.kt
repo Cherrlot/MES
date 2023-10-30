@@ -7,21 +7,22 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Environment
 import com.zhizhunbao.lib.common.CommonApplication
 import com.zhizhunbao.lib.common.bean.DeviceInformation
 import com.zhizhunbao.lib.common.dialog.SingleChoiceDialog
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.lib.common.ext.toast
 import com.zhizhunbao.lib.common.log.AppLog
-import com.zhizhunbao.lib.common.util.NetumUtil
 import com.zhizhunbao.lib.common.util.ThreadFactory
+import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
-import java.io.UnsupportedEncodingException
 import java.lang.ref.WeakReference
 import java.util.UUID
 import java.util.Vector
+
 
 /**
  * 蓝牙打印机
@@ -43,6 +44,7 @@ object PrintBluetoothManager {
     private var mBluetoothSocket: BluetoothSocket? = null
     private val mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") //蓝牙串口服务的UUID
     private var mOutputStream: OutputStream? = null
+
     /**
      * 是否开始读数
      */
@@ -53,13 +55,13 @@ object PrintBluetoothManager {
      */
     private var mIsRead = true
 
-    private var mThread : ReceiveDataThread? = null
+    private var mThread: ReceiveDataThread? = null
 
     private var mDialog: WeakReference<SingleChoiceDialog>? = null
 
-    private var mResultListener: ((String)-> Unit)? = null
+    private var mResultListener: ((String) -> Unit)? = null
 
-    private var mOnErrorListener: ((String)-> Unit)? = null
+    private var mOnErrorListener: ((String) -> Unit)? = null
 
     private var mOnStatusChangeListener: BluetoothStatusChangeListener? = null
 
@@ -99,7 +101,7 @@ object PrintBluetoothManager {
         return this
     }
 
-    fun startRead(resultListener: ((String)-> Unit)?, onError: ((String)-> Unit)?) {
+    fun startRead(resultListener: ((String) -> Unit)?, onError: ((String) -> Unit)?) {
         mResultListener = resultListener
         mOnErrorListener = onError
         mIsStart = true
@@ -139,7 +141,7 @@ object PrintBluetoothManager {
             override fun onReceive(context: Context, intent: Intent) {
                 val action = intent.action
                 if (BluetoothDevice.ACTION_FOUND == action) {
-                    AppLog.i("搜索到设备")
+//                    AppLog.i("搜索到设备")
                     var isAdded = false //标记扫描到的设备是否已经在数据列表里了
                     //获取扫描到的设备
                     val device =
@@ -180,7 +182,7 @@ object PrintBluetoothManager {
     /**
      * 获取设备信息
      */
-    fun getDevicesInfo(index: Int) : DeviceInformation {
+    fun getDevicesInfo(index: Int): DeviceInformation {
         return mDatas[index]
     }
 
@@ -257,6 +259,7 @@ object PrintBluetoothManager {
             AppLog.e(e.localizedMessage.safe())
         }
     }
+
     private fun convertVectorByteToBytes(data: Vector<Byte>): ByteArray {
         val sendData = ByteArray(data.size)
         if (data.size > 0) {
@@ -266,22 +269,11 @@ object PrintBluetoothManager {
         }
         return sendData
     }
+
     fun sendCommand(command: Vector<Byte>) {
         AppLog.d("发送指令")
-//        val command: Vector<Byte> = Vector<Byte>()
-//        val bs: ByteArray?
-//        if (content.isNotBlank()) {
-//            try {
-//                bs = content.toByteArray()
-//                for (i in bs.indices) {
-//                    command.add(bs[i])
-//                }
-                mOutputStream?.write(convertVectorByteToBytes(command), 0 ,command.size)
-                mOutputStream?.flush()
-//            } catch (var4: UnsupportedEncodingException) {
-//                var4.printStackTrace()
-//            }
-//        }
+        mOutputStream?.write(convertVectorByteToBytes(command), 0, command.size)
+        mOutputStream?.flush()
     }
 
     /**
@@ -293,7 +285,7 @@ object PrintBluetoothManager {
         for (i in mode.indices) {
             data.add(mode[i])
         }
-        mOutputStream?.write(convertVectorByteToBytes(data), 0 ,data.size)
+        mOutputStream?.write(convertVectorByteToBytes(data), 0, data.size)
         mOutputStream?.flush()
     }
 
@@ -305,7 +297,7 @@ object PrintBluetoothManager {
         for (i in mSelftest.indices) {
             data.add(mSelftest[i])
         }
-        mOutputStream?.write(convertVectorByteToBytes(data), 0 ,data.size)
+        mOutputStream?.write(convertVectorByteToBytes(data), 0, data.size)
         mOutputStream?.flush()
     }
 
@@ -330,7 +322,7 @@ object PrintBluetoothManager {
         }
 
         private fun typeOne() {
-            try{
+            try {
                 var bytes: Int
                 val buffer = ByteArray(256)
                 while (mIsRead) {
@@ -374,7 +366,7 @@ object PrintBluetoothManager {
                 val data = element.toInt()
                 if (data == 13)
                     break
-                else if (data >= 48){
+                else if (data >= 48) {
                     sb.append(data - 48)
                 }
             }

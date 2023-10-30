@@ -15,6 +15,7 @@ import com.zhizhunbao.lib.common.base.BaseAppActivity
 import com.zhizhunbao.lib.common.constant.BUS_LOGIN
 import com.zhizhunbao.lib.common.constant.BUS_RECONNECT_PRINTER
 import com.zhizhunbao.lib.common.dialog.SingleChoiceDialog
+import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.lib.common.ext.toast
 import com.zhizhunbao.lib.common.jpush.PushUtil
 import com.zhizhunbao.lib.common.log.AppLog
@@ -25,6 +26,7 @@ import com.zhizhunbao.lib.common.mmkv.AppLocalData
 import com.zhizhunbao.lib.common.router.ROUTER_PATH_LOGIN
 import com.zhizhunbao.lib.common.router.ROUTER_PATH_MAIN
 import com.zhizhunbao.lib.common.tool.drawable
+import com.zhizhunbao.lib.common.tool.getAssetsStreamByName
 import com.zhizhunbao.lib.common.tool.string
 import com.zhizhunbao.lib.common.util.AppManager
 import com.zhizhunbao.lib.common.websocket.AppWebsocket
@@ -86,9 +88,6 @@ class MainActivity : BaseAppActivity<MainViewModel, ActivityMainBinding>() {
                 override fun onConnect() {
                     addStrToCommand("SIZE 40 mm,30 mm\r\nGAP 2 mm,0 mm\r\n")
                     addStrToCommand("HOME\r\n")
-//                addStrToCommand("ERASE 0,0,320,240\r\n")
-//                addStrToCommand("QRCODE 0,0,M,4,A,0,\"eyJJZCI6IjkzNDQ1Njg0NTQxMjYwMTg1NyIsIm1hY2hpbmUiOiJQTTAzIiwicXR5IjozMDAwLCJrZXkxIjoiMTQwMCIsImtleTIiOiIwLjA0NyJ9Cg==\"\r\n")
-//                addStrToCommand("PRINT 1\r\n")
                     PrintBluetoothManager.sendCommand(Command)
                     Command.clear()
                 }
