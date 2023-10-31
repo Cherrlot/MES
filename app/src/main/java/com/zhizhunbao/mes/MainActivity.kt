@@ -86,7 +86,7 @@ class MainActivity : BaseAppActivity<MainViewModel, ActivityMainBinding>() {
             .addStatusChangeListener(object :
                 BluetoothStatusChangeListener {
                 override fun onConnect() {
-                    addStrToCommand("SIZE 40 mm,30 mm\r\nGAP 2 mm,0 mm\r\n")
+                    addStrToCommand("SIZE 75 mm,100 mm\r\nGAP 2 mm,0 mm\r\n")
                     addStrToCommand("HOME\r\n")
                     PrintBluetoothManager.sendCommand(Command)
                     Command.clear()

@@ -132,7 +132,7 @@ object BluetoothManager {
             override fun onReceive(context: Context, intent: Intent) {
                 val action = intent.action
                 if (BluetoothDevice.ACTION_FOUND == action) {
-                    AppLog.i("搜索到设备")
+//                    AppLog.i("搜索到设备")
                     var isAdded = false //标记扫描到的设备是否已经在数据列表里了
                     //获取扫描到的设备
                     val device =
