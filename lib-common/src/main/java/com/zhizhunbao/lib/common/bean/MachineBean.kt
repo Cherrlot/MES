@@ -13,4 +13,5 @@ import kotlinx.parcelize.Parcelize
 class MachineBean(
     var Id: String? = "",
     var No: String? = "",
+    var Workplace: String? = "",
 ): Parcelable

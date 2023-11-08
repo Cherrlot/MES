@@ -49,6 +49,8 @@ class WorkOrderViewModel : BaseViewModel() {
         map["orderby"] = "Starttime"
         map["Status"] = "Doing"
         map["Status"] = "Released"
+        map["Workplace"] = AppLocalData.workplace
+        map["Machine"] = AppLocalData.machineNo
         map["page"] = mPage
 
         initiateRequest(

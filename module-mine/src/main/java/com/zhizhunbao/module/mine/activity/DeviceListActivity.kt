@@ -83,6 +83,7 @@ class DeviceListActivity: BaseAppActivity<DeviceListViewModel, ActivityDeviceLis
         }.positiveButton {
             mAdapter.changeSelect(position)
             AppLocalData.machineNo = selectedMachine.No.safe()
+            AppLocalData.workplace = selectedMachine.Workplace.safe()
             AppWebsocket.appWebsocketConnect()
         }.negativeButton {  }
     }

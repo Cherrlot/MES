@@ -52,6 +52,9 @@ object AppLocalData {
     /** 机器编号 */
     var machineNo by MMKVUtil("")
 
+    /** 车间属性 */
+    var workplace by MMKVUtil("")
+
     /** 公司名称 */
     var companyName by MMKVUtil("")
 
