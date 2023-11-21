@@ -2,12 +2,13 @@
 minSdk = "24"
 compileSdk = "33"
 targetSdk ="30"
-versionCode = "2023110801"
-versionName = "1.0.5"
+versionCode = "2023112101"
+versionName = "1.0.8"
 # 0为本地环境  1为测试环境  2为线上环境 3为打印日志的线上环境
 netControl = "2"
 localApi = "\"http://10.20.11.114\""
 testApi = "\"http://10.20.11.114\""
+#releaseApi = "\"http://47.108.176.193\""
 releaseApi = "\"http://47.115.211.194\""
 #releaseApi = "\"http://zhizhunbao.51dingdian.com\""
 # 极光推送appkey

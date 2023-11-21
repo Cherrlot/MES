@@ -36,11 +36,16 @@ object AppWebsocket {
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
-//            .pingInterval(15, TimeUnit.SECONDS) // 设置 PING 帧发送间隔
+            .pingInterval(15, TimeUnit.SECONDS) // 设置 PING 帧发送间隔
             .build()
     }
 
     fun appWebsocketConnect() {
+//        val location = "ws://47.108.176.193:7000/websocket?token=${AppLocalData.token}"
+//        val request = Request.Builder()
+//            .url(location)
+//            .addHeader("Origin", "http://47.108.176.193:7000")
+//            .build()
         val location = "ws://47.115.211.194:7000/websocket?token=${AppLocalData.token}"
         val request = Request.Builder()
             .url(location)

@@ -47,6 +47,7 @@ class OptionViewModel : BaseViewModel() {
         jsonObject.put("Status", mOptionListBean.value?.No)
         jsonObject.put("code", code)
         jsonObject.put("machine", AppLocalData.machineNo)
+        jsonObject.put("workplace", AppLocalData.workplace)
         mOptionListBean.value?.Items?.let { options ->
             options.forEach { optionItemBean ->
                 when (optionItemBean.type) {
