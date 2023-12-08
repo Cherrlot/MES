@@ -59,7 +59,16 @@ data class OptionItemBean(
     var field: String? = null,
     var radioValue: String? = null,
     var inputValue: String? = null,
+    var groupValue: String? = null,
     var checkValue: MutableList<String>? = null,
+    var options: MutableList<String>? = null,
+    var groups: MutableList<OptionGroupItemBean>? = null,
+) : Parcelable
+
+
+@Parcelize
+data class OptionGroupItemBean(
+    var group: String? = null,
     var options: MutableList<String>? = null,
 ) : Parcelable
 

@@ -1,5 +1,7 @@
 package com.zhizhunbao.module.board.activity
 
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
@@ -22,23 +24,32 @@ import com.zhizhunbao.module.board.R
 import com.zhizhunbao.module.board.adapter.OptionInfoAdapter
 import com.zhizhunbao.module.board.databinding.ActivityOptionBinding
 import com.zhizhunbao.module.board.view.OptionCheckView
+import com.zhizhunbao.module.board.view.OptionGroupView
 import com.zhizhunbao.module.board.view.OptionInputView
 import com.zhizhunbao.module.board.view.OptionRadioView
 import com.zhizhunbao.module.board.view.OptionTextView
 import com.zhizhunbao.module.board.viewmodel.OptionViewModel
 
+
 /**
  * 操作表单
  */
 class OptionActivity : BaseAppActivity<OptionViewModel, ActivityOptionBinding>() {
+    private var mSuccessAudio = ""
+    private var mFailAudio = ""
     /** 父view*/
     private var mRootView: ViewGroup? = null
 
     private val mAdapter = OptionInfoAdapter()
 
+    private val mMediaPlayer = MediaPlayer()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_option)
+
+        mSuccessAudio = "android.resource://" + packageName + "/" + com.zhizhunbao.lib.common.R.raw.ok
+        mFailAudio = "android.resource://" + packageName + "/" + com.zhizhunbao.lib.common.R.raw.error
 
         initBluetooth()
 
@@ -91,10 +102,33 @@ class OptionActivity : BaseAppActivity<OptionViewModel, ActivityOptionBinding>()
         })
     }
 
+    private fun successSound() {
+        mMediaPlayer.setDataSource(this, Uri.parse(mSuccessAudio))
+        mMediaPlayer.prepare()
+        mMediaPlayer.start()
+    }
+
+    private fun failSound() {
+        mMediaPlayer.setDataSource(this, Uri.parse(mFailAudio))
+        mMediaPlayer.prepare()
+        mMediaPlayer.start()
+    }
+
+    override fun onDestroy() {
+        mMediaPlayer.release()
+        super.onDestroy()
+    }
+
     private fun initView() {
         mBinding.toolbar.title = viewModel.mOptionListBean.value?.Descr
         viewModel.mOptionListBean.value?.Items?.let { options ->
             options.forEach { optionItemBean ->
+                val group = optionItemBean.groups
+                if (!group.isNullOrEmpty()) {
+                    val groupView = OptionGroupView(this, optionItemBean)
+                    mRootView?.addView(groupView, mRootView?.childCount.safe())
+                    return@forEach
+                }
                 when (optionItemBean.type) {
                     "input" -> addInputView(optionItemBean)
                     "radio" -> addRadioView(optionItemBean)
@@ -142,6 +176,12 @@ class OptionActivity : BaseAppActivity<OptionViewModel, ActivityOptionBinding>()
     }
 
     override fun initObserve() {
+        viewModel.mResultLiveData.observe(this) {
+            if (it)
+                successSound()
+            else
+                failSound()
+        }
         viewModel.mOptionBean.observe(this) {
             mBinding.workOrder.bean = it
             mAdapter.setList(it?.info)

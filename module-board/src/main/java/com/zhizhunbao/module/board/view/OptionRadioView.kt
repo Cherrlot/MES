@@ -12,20 +12,43 @@ import com.zhizhunbao.lib.common.bean.OptionItemBean
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.module.board.R
 
-class OptionRadioView : LinearLayout {
+class OptionRadioView : OptionBaseView {
     private lateinit var mRoot: View
     private lateinit var mTitle: TextView
     private lateinit var mContent: RadioGroup
     private lateinit var mOptionItemBean: OptionItemBean
 
-    constructor(context: Context?, optionItemBean: OptionItemBean) : super(context) {
+    constructor(context: Context, optionItemBean: OptionItemBean, groupPosition: Int? = null) : super(context) {
         mOptionItemBean = optionItemBean
         mRoot = LayoutInflater.from(context).inflate(R.layout.view_option_radio, this)
         mTitle = mRoot.findViewById(R.id.tvTitle)
         mContent = mRoot.findViewById(R.id.rg)
-        setTitle(optionItemBean.title)
 
-        initRadio()
+        val group = optionItemBean.groups
+        if (!group.isNullOrEmpty()) {
+            mTitle.visibility = GONE
+            initGroupRadio(groupPosition.safe())
+        } else {
+            setTitle(optionItemBean.title)
+            initRadio()
+        }
+    }
+
+    private fun initGroupRadio(position: Int) {
+        val p = LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            LayoutParams.WRAP_CONTENT
+        )
+        val groups = mOptionItemBean.groups?.get(position)?.options
+        groups?.forEach {
+            val radioButton = RadioButton(context)
+            radioButton.text = it
+            mContent.addView(radioButton, p)
+        }
+        mContent.setOnCheckedChangeListener { _, checkedId ->
+            val radioButton = mRoot.findViewById<RadioButton>(checkedId)
+            mOptionItemBean.radioValue = radioButton?.text.toString()
+        }
     }
 
     private fun initRadio() {
@@ -52,15 +75,13 @@ class OptionRadioView : LinearLayout {
         }
     }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
     fun setTitle(title: String?) {
         mTitle.text = title
+    }
+
+    override fun clear() {
+        mContent.clearCheck()
     }
 }
