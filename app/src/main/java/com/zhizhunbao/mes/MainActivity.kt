@@ -160,6 +160,7 @@ class MainActivity : BaseAppActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun onDestroy() {
+        AppWebsocket.onDestroy()
         PrintBluetoothManager.onDestroy()
         BluetoothManager.onDestroy()
         super.onDestroy()

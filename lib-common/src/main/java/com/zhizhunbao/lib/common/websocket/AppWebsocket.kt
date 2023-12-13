@@ -27,6 +27,7 @@ object AppWebsocket {
     private var mWebSocket: WebSocket? = null
     private val Command: Vector<Byte> = Vector<Byte>()
     var mIsConnect = false
+    var mIsClose = false
 
     private val mHandler = Handler(Looper.getMainLooper())
 
@@ -46,6 +47,19 @@ object AppWebsocket {
 //            .url(location)
 //            .addHeader("Origin", "http://47.108.176.193:7000")
 //            .build()
+        // 关闭连接
+        mIsClose = true
+        mIsConnect = false
+        mWebSocket?.cancel()
+        mWebSocket = null
+        // 断线重连
+        mHandler.postDelayed({
+            mIsClose = false
+            connect()
+        } , 2 * 1000)
+    }
+
+    private fun connect() {
         val location = "ws://47.115.211.194:7000/websocket?token=${AppLocalData.token}"
         val request = Request.Builder()
             .url(location)
@@ -62,23 +76,19 @@ object AppWebsocket {
             super.onClosed(webSocket, code, reason)
             //连接关闭...
             AppLog.e("AppWebsocket连接关闭！$code$reason")
-            // 断线重连
-            mHandler.postDelayed({
-                appWebsocketConnect()
-            } , 10 * 1000)
-            mIsConnect = false
-            mWebSocket = null
         }
 
         override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
             super.onFailure(webSocket, t, response)
             // 出错了
             AppLog.e("AppWebsocket 连接错误！错误信息：" + t.message)
-            mIsConnect = false
-            // 断线重连
-            mHandler.postDelayed({
-                appWebsocketConnect()
-            } , 10 * 1000)
+            if (!mIsClose) {
+                mIsConnect = false
+                // 断线重连
+                mHandler.postDelayed({
+                    connect()
+                } , 3 * 1000)
+            }
         }
 
         override fun onMessage(webSocket: WebSocket, text: String) {
@@ -155,4 +165,10 @@ object AppWebsocket {
         }
     }
 
+    fun onDestroy() {
+        mIsClose = true
+        mWebSocket?.cancel()
+        mIsConnect = false
+        mWebSocket = null
+    }
 }

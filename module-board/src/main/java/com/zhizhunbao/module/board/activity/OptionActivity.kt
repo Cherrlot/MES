@@ -20,6 +20,7 @@ import com.zhizhunbao.lib.common.ext.toast
 import com.zhizhunbao.lib.common.log.AppLog
 import com.zhizhunbao.lib.common.manager.BluetoothManager
 import com.zhizhunbao.lib.common.manager.BluetoothStatusChangeListener
+import com.zhizhunbao.lib.common.websocket.AppWebsocket
 import com.zhizhunbao.module.board.R
 import com.zhizhunbao.module.board.adapter.OptionInfoAdapter
 import com.zhizhunbao.module.board.databinding.ActivityOptionBinding
@@ -37,6 +38,7 @@ import com.zhizhunbao.module.board.viewmodel.OptionViewModel
 class OptionActivity : BaseAppActivity<OptionViewModel, ActivityOptionBinding>() {
     private var mSuccessAudio = ""
     private var mFailAudio = ""
+
     /** 父view*/
     private var mRootView: ViewGroup? = null
 
@@ -103,15 +105,26 @@ class OptionActivity : BaseAppActivity<OptionViewModel, ActivityOptionBinding>()
     }
 
     private fun successSound() {
-        mMediaPlayer.setDataSource(this, Uri.parse(mSuccessAudio))
-        mMediaPlayer.prepare()
-        mMediaPlayer.start()
+        try {
+            mMediaPlayer.reset()
+            mMediaPlayer.setDataSource(this, Uri.parse(mSuccessAudio))
+            mMediaPlayer.prepare()
+            mMediaPlayer.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     private fun failSound() {
-        mMediaPlayer.setDataSource(this, Uri.parse(mFailAudio))
-        mMediaPlayer.prepare()
-        mMediaPlayer.start()
+        try {
+            mMediaPlayer.reset()
+            mMediaPlayer.setDataSource(this, Uri.parse(mFailAudio))
+            mMediaPlayer.prepare()
+            mMediaPlayer.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onDestroy() {
