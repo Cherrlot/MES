@@ -149,7 +149,7 @@
                     android:textColor="@color/color666666"
                     android:textSize="@dimen/DIMEN_14SP"
                     android:textStyle="bold"
-                    android:text="@{bean.Qty}"
+                    android:text="@{bean.getPlanString}"
                     android:layout_marginTop="@dimen/DIMEN_15DP"
                     android:layout_marginEnd="@dimen/DIMEN_15DP"
                     android:gravity="end|center_vertical"
