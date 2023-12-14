@@ -32,6 +32,7 @@ class BoardViewModel : BaseViewModel() {
     fun getDataList() {
         val map = HashMap<String, Any?>()
         map["page"] = mPage
+        map["Status <>"] = "Closed"
 
         initiateRequest(
             {

@@ -46,13 +46,13 @@
 
         <ProgressBar
             android:id="@+id/pb"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/DIMEN_8DP"
+            android:layout_marginHorizontal="15dp"
             android:layout_marginTop="@dimen/DIMEN_10DP"
             android:background="@color/color_E5E5E5"
-            android:layout_marginHorizontal="15dp"
             android:progressDrawable="@drawable/board_progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
@@ -93,27 +93,55 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/DIMEN_15DP"
             android:layout_marginStart="@dimen/DIMEN_2DP"
-            android:text="@{bean.Descr}"
             android:gravity="start|top"
+            android:text="@{bean.Descr}"
+            app:layout_constraintEnd_toEndOf="@id/gl1"
             app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintTop_toBottomOf="@id/d1"
-            app:layout_constraintEnd_toEndOf="@id/gl1"
             tools:text="上海市浦江新区惠南镇城上海市浦江新区惠南镇城上海市浦江新区惠南镇城上海市浦江新区惠南镇城" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tv_remark"
+            tools:listitem="@layout/item_msg_grid" />
 
         <TextView
             android:id="@+id/tv_remark"
             style="@style/text_99_14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/DIMEN_2DP"
             android:layout_marginVertical="@dimen/DIMEN_15DP"
-            android:layout_marginStart="@dimen/DIMEN_2DP"
-            android:text="@{bean.Remark}"
             android:gravity="start|top"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{bean.Remark}"
+            app:layout_constraintEnd_toEndOf="@id/tv_finish"
             app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintTop_toBottomOf="@id/tv_location"
-            app:layout_constraintEnd_toEndOf="@id/tv_finish"
             tools:text="上海市浦江新区惠南镇城上海市浦江新区惠南镇城上海市浦江新区惠南镇城上海市浦江新区惠南镇城" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mShowMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/DIMEN_10DP"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_finish"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/grid">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivMore"
+                android:layout_width="@dimen/DIMEN_24DP"
+                android:layout_height="@dimen/DIMEN_24DP"
+                android:src="@drawable/ic_chevron"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             style="@style/text_99_14"
@@ -121,8 +149,8 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/DIMEN_15DP"
             android:text="@{bean.getFinishString}"
-            app:layout_constraintTop_toBottomOf="@id/d1"
             app:layout_constraintEnd_toStartOf="@id/tv_finish"
+            app:layout_constraintTop_toBottomOf="@id/d1"
             tools:text="100" />
 
         <TextView
@@ -133,8 +161,8 @@
             android:layout_marginVertical="@dimen/DIMEN_15DP"
             android:layout_marginEnd="@dimen/DIMEN_15DP"
             android:text="@{bean.getPlanString}"
-            app:layout_constraintTop_toBottomOf="@id/d1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/d1"
             tools:text="100" />
 
         <androidx.constraintlayout.widget.Guideline

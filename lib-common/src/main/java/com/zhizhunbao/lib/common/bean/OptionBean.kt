@@ -6,6 +6,19 @@ import kotlinx.parcelize.Parcelize
 
 /**
  * 操作
+ * 袋子型号：Category
+ * 气柱规格：Spec
+ * 柱宽：Colswidth
+ * 下单数量：Qty
+ * 损耗：Los
+ * 节点：Splits
+ * 生成交期：Delivery
+ * 包装要求：Package
+ * 生成备注：Remark
+ * 型号：Product
+ * 用料：Key1，Key2连个字段，中间用*连接
+ * 柱数量：Cols
+ *
  */
 @Parcelize
 data class OptionBean(
@@ -13,9 +26,19 @@ data class OptionBean(
     var Co: String? = null,
     var Category: String? = null,
     var No: String? = null,
+    var Spec: String? = null,
+    var Colswidth: String? = null,
+    var Qty: String? = null,
+    var Splits: String? = null,
+    var Delivery: String? = null,
+    var Package: String? = null,
+    var Los: String? = null,
     var Descr: String? = null,
     var Station: String? = null,
     var Status: String? = null,
+    var Key1: String? = null,
+    var Key2: String? = null,
+    var Cols: String? = null,
     var Uname: String? = null,
     var Workplace: String? = null,
     var Machine: String? = null,
@@ -27,9 +50,11 @@ data class OptionBean(
     var Plan: Int? = null,
     var Finish: Int? = null,
     var steps: MutableList<OptionListBean>? = null,
+    var keys: MutableList<String>? = null,
 ) : Parcelable {
     fun getFinishString() = Finish.safe(0).toString().plus("/")
     fun getPlanString() = Plan.safe(1).toString()
+    fun getMaterialString() = Key1.safe().plus(" * ").plus(Key2)
 }
 
 @Parcelize

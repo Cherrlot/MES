@@ -319,4 +319,17 @@
     <string name="scan">扫码</string>
     <string name="option">操作</string>
     <string name="input_hint">请输入</string>
+    <string name="work_message1">袋子型号</string>
+    <string name="work_message2">气柱袋规格</string>
+    <string name="work_message3">柱宽</string>
+    <string name="work_message4">下单数量</string>
+    <string name="work_message5">损耗</string>
+    <string name="work_message6">节点</string>
+    <string name="work_message7">生产交期</string>
+    <string name="work_message8">包装要求</string>
+    <string name="work_message9">生产备注</string>
+    <string name="work_message10">型号</string>
+    <string name="work_message11">用料</string>
+    <string name="work_message12">柱数</string>
+    <string name="work_message">工单信息</string>
 </resources>

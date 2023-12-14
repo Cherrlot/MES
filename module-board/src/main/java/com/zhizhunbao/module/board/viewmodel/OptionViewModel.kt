@@ -86,11 +86,13 @@ class OptionViewModel : BaseViewModel() {
                 hideLoading()
                 "提交成功".toast()
                 mResultLiveData.value = true
+                mFinishLiveData.value = true
             },
             failed = { s: String?, _: StateType ->
                 hideLoading()
                 s.toast()
                 mResultLiveData.value = false
+                mFinishLiveData.value = false
             })
     }
 
