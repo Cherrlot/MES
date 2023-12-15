@@ -73,7 +73,7 @@ object AppLocalData {
     fun resetAll() {
         token = ""
         authId = ""
-        machineNo = ""
+//        machineNo = ""
         localIp = BuildConfig.BASE_URL
         diningInfo = DiningListBean()
         companyInfo = CompanyInfoBean()
