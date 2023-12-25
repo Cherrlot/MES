@@ -53,7 +53,8 @@ class WorkOrderViewModel : BaseViewModel() {
      */
     fun getDataList() {
         val map = HashMap<String, Any?>()
-        map["orderby"] = "Starttime"
+//        map["orderby"] = "Starttime"
+        map["orderby"] = "id"
 //        map["Status"] = "Doing"
 //        map["Status"] = "Released"
         map["Workplace"] = AppLocalData.workplace
