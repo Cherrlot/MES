@@ -34,6 +34,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivDetail"
             android:layout_width="@dimen/DIMEN_13DP"
             android:layout_height="@dimen/DIMEN_13DP"
             android:layout_marginEnd="@dimen/DIMEN_8DP"
@@ -53,6 +54,7 @@
             android:text="@{bean.Descr}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_setting"
+            app:layout_constraintEnd_toStartOf="@id/ivDetail"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
