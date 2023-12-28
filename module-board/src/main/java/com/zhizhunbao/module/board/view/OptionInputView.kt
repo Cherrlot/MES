@@ -1,16 +1,18 @@
 package com.zhizhunbao.module.board.view
 
 import android.content.Context
+import android.text.InputType.TYPE_CLASS_NUMBER
+import android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.widget.addTextChangedListener
 import com.zhizhunbao.lib.common.bean.OptionItemBean
 import com.zhizhunbao.lib.common.ext.safe
 import com.zhizhunbao.module.board.R
+
 
 class OptionInputView : OptionBaseView {
     private lateinit var mRoot: View
@@ -23,6 +25,11 @@ class OptionInputView : OptionBaseView {
         mRoot = LayoutInflater.from(context).inflate(R.layout.view_option_input, this)
         mTitle = mRoot.findViewById(R.id.tvTitle)
         mContent = mRoot.findViewById(R.id.etContent)
+
+        if (mOptionItemBean.format == "number") {
+            // 仅能输入数字
+            mContent.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_FLAG_DECIMAL
+        }
 
         val group = optionItemBean.groups
         if (!group.isNullOrEmpty()) {

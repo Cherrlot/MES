@@ -58,7 +58,13 @@ class OptionViewModel : BaseViewModel() {
                     jsonObject.put("group", optionItemBean.groupValue)
                 }
                 when (optionItemBean.type) {
-                    "input" -> jsonObject.put(optionItemBean.field.safe(), optionItemBean.inputValue.safe())
+                    "input" -> {
+                        var value = optionItemBean.inputValue.safe()
+                        if(optionItemBean.format == "number" && value.trim().isEmpty()) {
+                            value = "0"
+                        }
+                        jsonObject.put(optionItemBean.field.safe(), value)
+                    }
                     "radio" -> jsonObject.put(optionItemBean.field.safe(), optionItemBean.radioValue.safe())
                     "checkbox" -> {
                         val jsonArray = JSONArray()
@@ -86,13 +92,13 @@ class OptionViewModel : BaseViewModel() {
                 hideLoading()
                 "提交成功".toast()
                 mResultLiveData.value = true
-                mFinishLiveData.value = true
+//                mFinishLiveData.value = true
             },
             failed = { s: String?, _: StateType ->
                 hideLoading()
                 s.toast()
                 mResultLiveData.value = false
-                mFinishLiveData.value = false
+//                mFinishLiveData.value = false
             })
     }
 

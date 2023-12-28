@@ -51,6 +51,7 @@ data class OptionBean(
     var Finish: Int? = null,
     var steps: MutableList<OptionListBean>? = null,
     var keys: MutableList<String>? = null,
+    var details: MutableList<String>? = null,
 ) : Parcelable {
     fun getFinishString() = Finish.safe(0).toString().plus("/")
     fun getPlanString() = Plan.safe(1).toString()
@@ -82,6 +83,7 @@ data class OptionItemBean(
     var type: String? = null,
     var value: String? = null,
     var field: String? = null,
+    var format: String? = null,
     var radioValue: String? = null,
     var inputValue: String? = null,
     var groupValue: String? = null,

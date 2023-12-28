@@ -293,6 +293,10 @@
         <item name="android:textSize">@dimen/DIMEN_10SP</item>
         <item name="android:textColor">@color/app_black</item>
     </style>
+    <style name="text_00_12">
+        <item name="android:textSize">@dimen/DIMEN_12SP</item>
+        <item name="android:textColor">@color/app_black</item>
+    </style>
     <style name="text_66_16_bold">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/DIMEN_16SP</item>
